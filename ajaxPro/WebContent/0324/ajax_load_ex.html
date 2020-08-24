@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax_load_ex</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+		$(function(){
+			$("#my-form").submit(function(){   // submit 메소드를 쓰는 방법  회원가입에서는 submit 위주로 사용한다. 
+		//	$("button").click(function(){
+				var id = $("#idd").val();
+				var pw = $("#pw").val();
+				
+				
+				var url = "jdbc.jsp"; // 호출
+				// data.jsp로 변경 후  (id랑 pw를 받아서 두개 값이 모두 null이 아니면 로그인 성공 / 하나라도 다르면  로그인 실패)
+				var data = {"iid":id,"pw":pw}; // 데이터 타입  json
+				var params = $.param(data);	
+								
+				$("div").load(url, params);
+				
+				
+				return false;
+			})
+			
+			
+		})
+		
+		</script>
+	</head>
+	<body>
+		<form id="my-form">
+			id:<input type="text" id="idd"><br>
+			pw:<input type="password" id="pw"><br>
+		
+			<!--<button>로그인</button>  -->
+			<input type="submit" value="로그인">
+			 <!--
+			  form 안에는 button이 아니라 submit을 사용한다  
+			 -->
+		</form>
+		
+		<div></div>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>JavaScript1</title>
+			<style>
+				/*css정의*/
+			
+			</style>
+			<script>
+				/*자바스크립트 정의*/
+				function myFunc(){alert("함수호출입니다");  myFunc2();}
+				function myFunc2(){alert("함수호출입니다 2");}
+				
+				
+				
+				var now;
+				now = new Date();
+				
+				/*body태크에 now변수의 값을 출력해라*/
+				document.write(now);
+				
+				document.write("<br>Hello world!!!<br>");
+				
+				document.write("<div style='width:100px; height:100px; background-color:yellow;'> 여기는 div입니다.</div>");
+				
+			</script>
+			
+		</head>
+		<body>
+			<button onclick ="myFunc();">버튼클릭!</button>
+			<div id="divBox"></div>
+			<script>
+				document.getElementById("divBox").innerHTML = "연지은";
+			
+			</script>
+		
+		</body>
+	</html>

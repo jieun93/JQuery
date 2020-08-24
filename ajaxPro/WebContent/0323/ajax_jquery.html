@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax_jquery</title>
+		<!-- 
+		문제 ajax_jquery를 이용해서 json타입의 데이터를 가져온다
+		
+		1)데이터 형식
+		data폴더안에
+		name.json 파일을 만들고 json 타입으로 3명의 이름과 나이를 작성한다.
+		
+		2) html 파일
+		ajax_jquery에서 json 형식으로 기입한 이름과 나이를 가져온 후 body태그에 붙인다
+		
+		3) 최종출력 형식
+		이름   : 연지은 ,  나이 : 28
+		이름	: 김태평,  나이 : 34
+		
+		 -->
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		 <script>
+		 $(function(){
+			 $.ajax({
+				 //url:"../data/name1.json",  ** 없는 페이지  
+				 url:"../data/name.json",
+				 dataType:"json",
+				 success:function(data){
+					 var str="";
+					 $.each(data,function(i){
+						 str += data[i].name;
+						 str += data[i].age;
+					 })
+					 $("body").append(str);
+				 }, // 에러페이지를 만들어서 오류발생시 페이지가 보이도록 붙이는거
+				 error:function(xhr){
+					 console.log("오류발생"+xhr.status);
+					 if(xhr.status == 404){
+						 location.href ="error.html";
+					 }
+				 }
+			
+			 })
+		 })
+		 
+		 
+		 
+		 </script>
+		 
+		 
+	</head>
+	<body>
+	
+	</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>inputTime</title>
+		<style>
+		.id{ background-color:yellow; }
+		.pw{ background-color:blue;}
+		.pw_re{background-color:green;}
+		._name{ background-color:blue}
+		.border{border:1px solid red;}
+		.imgbtn{ width:50px; height:50px;}
+		</style>
+	</head>
+		<body>
+		<!--  type의 속성값
+		
+		 text :텍스트를 입력할 수 있는 한줄짜리 필드
+		 password : 비밀번호를 입력할 수 있는 한줄짜리 필드
+		 radio : 라디오 버튼 생성( 한만 선택할 경우 name 을 동일하게 설정)
+		 checkbox  : 체크박스생성
+		 file : 파일 이름을 입력하는 필드 생성( 선택가능)
+		 reset : 초기화 버튼 (버튼을 누르면 모든 입력 필드가 초기화된다)
+		 image : 이미지를 전송버튼으로 만든다.(submit 기능과 동일)
+		 submit: 제출 버튼(서버측으로 데이터를 전송한다)
+		 hidden : 사용자에게는 보이지 않지만 서버로 전송되는 데이터
+		
+		 -->
+		
+			<form>
+			<!-- label은 아이디 창이 아닌곳에서도 커서를 깜박일 수 있게 하는거 
+			 type은 지정되어 있는 이름/  나머지는 내가 지정해주는 거 
+			-->
+			
+		 <label for="id"> 아이디 : </label><input type="text"  name="id" id="id" class="id"> <br>
+		  <label for="pw">비밀번호:</label> <input type ="password" name="pw" id="pw" class="pw" size="10"  maxlength="7"><br>
+		 <label for="pw_re"> 비밀번호 재확인:</label><input type ="password" name="pw_re" id="pw_re" class="pw_re"  size="10" maxlength="7"><br>
+		 <label for="name">이름:</label><input type ="text"  name="_name"  id="name"  class="_name"><br>
+		 <hr><!-- hr은 줄 긋는거 -->
+		 이메일: <input type="email" name="email" class="border"><br>
+		 색상:<input type="color" name="color"> <br>
+		 전화번화:<input type="tel" name="tel"><br>
+		 날짜:<input type="date" name="date"><br>
+		 URL: <input type="url" name="url "  class="border"> <br>
+		 <hr>
+		 
+		 <input type="radio" name="gender" value="남자" checked="checked">남자<br> <!-- 성별 둘 중에 하나만 택하려면 네임을 같게 써야 한다./checked를 하면 기본값으면하겠다는 의미 -->
+		 <input type="radio" name="gender" value="여자">여자<br>
+		 <hr>
+		 <input type="file" name = "file">
+		 
+		 <hr>
+		 <select  name="month"  id="month" class="month">
+			 	<option value="january">1월</option>
+			 	<option value="february">2월</option>
+			 	<option selected>3월</option>
+			 	<option>4월</option>
+			 	<option>5월</option>
+			 	<option>6월</option>
+			 	<option>7월</option>
+			 	<option>8월</option>
+			 	<option>9월</option>
+			 	<option>10월</option>
+			 	<option>11월</option>
+			 	<option>12월</option>
+		 </select>
+		 
+		 
+		 <textarea rows="5" cols="50" name="textBox"></textarea>
+		 
+		 <input type = "hidden "  name="hidden "  value ="1000">
+		 
+		 
+		 
+		 		<input type="reset" value="취소">
+		 		<input type="image" src="../img/btn.jpg"  class="imgbtn">
+				<input type = "submit" value ="확인">
+			</form>  
+		</body>
+</html>

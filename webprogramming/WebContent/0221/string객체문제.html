@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>string 객체 문제</title>
+			
+			<script>
+				/*문제 1)
+					주민등록번호를 110326-4432618 로 입력받은 경우
+					출력))
+					생일은 2011년 3월 26일
+					성별은 여자
+					나이는 만 8살 (오늘날짜를 기준으로 만 나이 계산)
+				var str = 110326-4432618  앞에 문자를 떼어서 
+				
+				
+				문제2) 
+				promt로 주민 번호를 입력받아서 출력을 해주세요.
+				출력))
+				 생일은 2011년 3월 26일
+					성별은 여자
+					나이는 만 8살 (오늘날짜를 기준으로 만 나이 계산)
+					
+				 문제3)
+					주민번호의 유효성을 검사 
+					
+					주민번호를 prompt로 입력받아 주민번호의 유효성을 검사하기
+					주민번호가 ABCDEF-GHIJKLM 일 경우
+					1. A*2 + B*3 + C*4 + D*5 + E*6 + F*7+ G*8 + H*9 
+					  + I*2 +J*3 +K*4 + L*5 의 총합을 구한다 
+					2. 1번의 합을 11로 나눈 나머지를 구한다 
+					3. 11에서 2번의 결과를 뺀다
+					4. 3번의 결과값이 0~9이면 그대로, 10이면 0, 11이면 1로 변환
+					5. 4번의 결과와 맨끝자리 M의 값이 같으면 맞는 번호 
+					
+					출력) 주민번호가 유효한 번호 입니다 or 유효한 번호가 아닙니다. 
+				 
+				 
+				 
+				 
+				*/
+				
+				function proc1(){
+					 
+					 
+					 var gender="";
+					 var age ="";
+					 
+					 var today = new Date();
+					
+					 var str = "110326-4432618";
+					
+					 //생년월일구하기
+					 var birthYear;  //20    11  
+					 (str.charAt(7) <="2")? birthYear="19"+str.substring(0,2) : birthYear="20"+str.substring(0,2);
+					 
+				
+					 
+					 var birthMonth = str.substring(2, 4);
+					 var birthDate  = str.substring(4, 6);
+					 var birth = birthYear+"년"+birthMonth+"월"+birthDate+"일";
+			
+
+					 
+					 
+					 
+					 //성별구하기
+					 if(str.charAt(7)=="3" || str.charAt(7)=="1"){
+						 gender = "남자";
+					 }else if(str.charAt(7)=="4" ||str.charAt(7)=="2"){
+						  gender = "여자";
+					 }
+					  
+					 
+					 
+					 //나이구하기
+					 
+					 age = today.getFullYear()-parseInt(birthYear);
+					 
+					 
+					 
+					 document.write(birth+"<br>");
+					 document.write(gender+"<br>");
+					 document.write(age);
+				 }
+				 
+				 
+				 
+				 function proc2(){
+					 
+					 					 
+					
+					 
+					 var gender="";
+					 var age ="";
+					 
+					 var today = new Date();
+					
+					 var que = prompt("주민등록을 입력해주세요.");
+					
+					 //생년월일구하기
+					 var birthYear;  //20    11  
+					 (que.charAt(7) <="2")? birthYear="19"+que.substring(0,2) : birthYear="20"+que.substring(0,2);
+					 
+				
+					 
+					 var birthMonth = que.substring(2, 4);
+					 var birthDate  = que.substring(4, 6);
+					 var birth = birthYear+"년"+birthMonth+"월"+birthDate+"일";
+			
+
+					 
+					 
+					 
+					 //성별구하기
+					 if(que.charAt(7)=="3" || que.charAt(7)=="1"){
+						 gender = "남자";
+					 }else if(que.charAt(7)=="4" ||que.charAt(7)=="2"){
+						  gender = "여자";
+					 }
+					  
+					 
+					 //나이구하기
+					 
+					 age = today.getFullYear()-parseInt(birthYear);
+					 
+					 document.write(birth+"<br>");
+					 document.write(gender+"<br>");
+					 document.write(age);
+					 
+					 
+					 
+					 
+				 }
+				 
+				 
+				 function proc3(){
+						/*
+						주민번호의 유효성을 검사 
+						
+						주민번호를 prompt로 입력받아 주민번호의 유효성을 검사하기
+						주민번호가 ABCDEF-GHIJKLM 일 경우
+						1. A*2 + B*3 + C*4 + D*5 + E*6 + F*7+ G*8 + H*9 
+						  + I*2 +J*3 +K*4 + L*5 의 총합을 구한다 
+						2. 1번의 합을 11로 나눈 나머지를 구한다 
+						3. 11에서 2번의 결과를 뺀다
+						4. 3번의 결과값이 0~9이면 그대로, 10이면 0, 11이면 1로 변환
+						5. 4번의 결과와 맨끝자리 M의 값이 같으면 맞는 번호 
+						
+						출력) 주민번호가 유효한 번호 입니다 or 유효한 번호가 아닙니다.
+						*/
+						
+						var str = prompt("주민번호를 입력해주세요.");
+						var strArr =str.split("-");
+						str = strArr[0].concat(strArr[1]);
+						var sum = 0;
+						var num = 2;
+						var result = "";
+						
+						for(var i = 0 ; i < 12;i++){
+							if(num>9){num=2;}
+							
+							sum+=str.charAt(i)*num;
+							num++;
+						}
+						sum=sum%11;
+						sum=11-sum;
+					
+						
+						
+						if(sum>=10){
+				 			sum = sum.charAt(1);
+						}
+						
+						if(str.charAt(12)==sum){
+							result = "주민번호가 유효한 번호입니다."
+						}else{
+							result = "주민번호가 유효한 번호가 아닙니다."
+						}
+						document.getElementById("result").innerHTML= result;
+					}
+						
+				 
+				 
+				 
+				 
+			//	 proc1();
+			//	 proc2();
+				proc3();
+				 
+			</script>
+		</head>
+		<body>
+	
+		 
+		
+		</body>
+	</html>

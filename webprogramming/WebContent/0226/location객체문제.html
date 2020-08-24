@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>Insert title here</title>
+			<script>
+			/* 
+			1) 3초 마다 페이지가 리로드 되게 해주세요.
+				console.log("pageload");
+				F12 element 놓고 확인(페이지 깜박임)
+			2) 3초 마다 img 태그 생성한 후 body에 하나씩 붙여주세요.
+				
+			 */
+			 
+			 		
+			function change(){
+				 //location.reload();
+				 
+				 vimg ="가구1";
+				 imgele = document.createElement("img");
+				 imgele.src ="../img/"+vimg+".jpg";
+				 imgele.width =100;
+				 imgele.height =100;
+				 
+			}
+			 widow.onload = function{ setInterval(change, 3000))
+				
+			 }
+			
+			
+			 
+			 
+			 
+			
+			 
+			
+			</script>
+		</head>
+		<body>
+		
+		</body>
+	</html>

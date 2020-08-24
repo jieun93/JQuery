@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Product(제품선택)</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="../json2js/json2.js"></script>
+		<style>
+		div.container{border:1px solid black; width:850px; height:500px; margin:0 auto; padding:15px; }
+		div.form-group{border:1px solid black; width:800px; height:70px; padding:15px; margin:15px;}
+		div#result{border:1px solid black; width:800px; height:150px; padding:15px; margin:15px;}
+		h1{text-align: center; }
+		h2{text-align: center; display:inline-block;}
+		select{width:200px; height:50px; }
+		#table{margin:0 auto;}
+		</style>
+		<script>
+		$(function(){
+			$("select").click(function(){
+			// 왼쪽 콤보 박스 
+			$.ajax({
+				url:"jdbc.jsp",
+				datatype:"json"
+				
+			})
+			.done(function(data){
+				data =JSON.parse(data.trim());
+				
+				// 반복문을 쓰는거
+				$.each(data, function(i){
+					console.log(data[i].lprod_gu);  // lprod_gu의 i번째를 불러와 창에 나오는거 
+					$("#lprod").append("<option value='"+data[i].lprod_gu+"'>"+data[i].lprod_nm+"</option>");
+				})
+				
+				
+				
+			})
+			.fail(function(){
+				console.log("fail");
+				console.log("불러오기 실패");
+			})
+			
+			
+			// 오른쪽 콤보 박스 
+			$("body").delegate("#lprod","change", function(){
+				console.log($(this).val()); // 데이터를 선택하는거??
+				$("#prod option").remove(); //  제거하는거 
+				
+				// jsp와  연결, db랑 연결 해주기 위해 설정
+				$.ajax({
+					url:"jdbc2.jsp",
+					datatype:"json",
+					type:"get",
+					data:"lgu="+$(this).val() // 데이터를 jsp에 보내는거 
+					
+				})
+				.done(function(data){
+					data =JSON.parse(data.trim());
+					
+					$.each(data, function(idata){
+						console.log(data[idata].prod_lgu);
+						$("#prod").append("<option value='"+data[idata].prod_lgu+"'>"+data[idata].prod_name+"</option>");
+					})
+					
+				})
+				.fail(function(){
+					console.log("fail");
+					console.log("불러오기 실패");
+				})
+				
+			
+			// 결과 창 만들기 
+			$("body").delegate("#prod","change", function(){
+			$.ajax({
+				url:"jdbc3.jsp",
+				datatype:"json",
+				type:"get",
+				data:"dd="+$(this).val() // jsp로 데이터 보내기 
+			})
+				.done(function(data){  //  jsp로부터 데이터 받기 
+					data = JSON.parse(data.trim());
+					
+				
+					$.each(data, function(dataa){
+						console.log(data[dataa].prod_lgu);
+						$("#lgu").html(data[dataa].prod_lgu+"<br>");
+						$("#nm").html(data[dataa].prod_name+"<br>");
+						$("#idd").html(data[dataa].prod_id+"<br>");
+						$("#cost").html(data[dataa].prod_cost+"<br>");
+						$("#buy").html(data[dataa].prod_buyer+"<br>");
+						
+					})
+				})
+				.fail(function(){
+					console.log("fail");
+					console.log("불러오기 실패");
+				})
+				
+				
+			})
+				
+				
+			})
+			
+			
+			
+			
+			})
+			
+			
+			
+		});
+		
+		
+		</script>
+	</head>
+	<body>
+	
+		<div class="container" >
+			<h1>제품 리스트</h1>
+		
+			<div class="form-group">
+				<h2>제품 분류리스트 </h2>
+				<select id="lprod"></select>
+				
+				<h2> 상품리스트 </h2>
+				<select id="prod"></select>
+			</div>
+		
+		
+			<div id="result">
+			<table id="table"  border="1" style="text-align:center">
+				
+				<tr id="list">
+					<th>PROD_LGU</th>
+					<th>PROD_NM</th>
+					<th>PROD_ID</th>
+					<th>PROD_BUYER</th>
+					<th>PROD_COST</th>
+				</tr>
+				<tr>
+				<td id="lgu"></td>
+				<td id="nm"></td>
+				<td id="idd"></td>
+				<td id="buy"></td>
+				<td id="cost"></td>
+				</tr>
+			
+			</table>
+			
+			</div>
+		
+		
+		</div>	
+		
+	
+	</body>
+</html>

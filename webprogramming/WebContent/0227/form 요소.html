@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+		<meta charset="UTF-8">
+		<title>form 요소</title>
+		<style>
+			.gugu{text-align:center;}
+		</style>
+		<script>
+			 function btn(){
+				//form 요소를 이용해서 텍스트 박스안에 내용을 alert로 출력
+				// document.ff.name.value;
+				// document.ff.gender.value; 
+				var ele = document.ff;  //checkbox는 다중 선택
+				var result = document.getElementById("result");
+				var str = [];
+				var check= false;
+				
+				
+				 for(var i = 0; i < ele.hobby.length; i++){
+					if(ele.hobby[i].checked){  
+						check = true;
+						str += ele.hobby[i].value;
+					}
+				} 
+				
+				result = ff.name.value+"님!!\n"
+				result += "당신의 성별은"+ ff.gender.value+"이구요\n"
+				
+				if(check==false){
+				result += "취미는없습니다."
+				}else{
+					
+				result += "취미는"+str+"입니다."			
+				}
+				
+				document.getElementById("result").innerHTML=result;
+			} 
+			 
+			
+			function btt(){
+				
+			var ele = document.kku;
+			var result = ele.gugu.value; //function의 select gugu의 value속성을 가져오는거
+			var str = "";
+			
+			//alert(result);
+			
+			for(var i = 1; i<10; i++){
+				str += result+"*"+i+"="+result*i+"<br>"
+			}
+			
+			document.getElementById("result1").innerHTML=str;
+			}
+		
+		
+		
+		</script>
+		</head>
+	<body>
+		<form name="ff">
+			이름 : <input type="text" name="name" id="name"><br>
+			성별 : <input type="radio" name="gender" value="남자male">남자
+			<input type="radio" name="gender" value="여자female">여자<br>
+			
+			<hr>
+			
+			취미 : <input type="checkbox" name="hobby" value="여행">여행
+			<input type="checkbox" name="hobby" value="독서">독서
+			<input type="checkbox" name="hobby" value="영화감상">영화감상<br><br>
+			
+			
+			
+			<input type="button" onclick="btn();" value="결과출력">
+			
+			
+			<br><br>
+			<textarea rows="5" name="area" id="result">
+			
+			
+			</textarea>
+			
+		</form>
+		<br>	<br>	<br>	<br>	<br>
+		<form  name ="kku">
+			<select name ="gugu" id="gugu">
+				<option id ="gugudan" value="2">2</option>
+				<option id ="gugudan" value="3">3</option>
+				<option id ="gugudan" value="4">4</option>
+				<option id ="gugudan" value="5">5</option>
+				<option id ="gugudan" value="6">6</option>
+				<option id ="gugudan" value="7">7</option>
+				<option id ="gugudan" value="8">8</option>
+				<option id ="gugudan" value="9">9</option>
+			</select> 단
+		
+		
+			<input type= "button" onclick="btt()"  value="출력"><br>
+				<h2>결과 출력</h2>
+		<!--  <textarea rows="5" name="result1" id="result1"></textarea>-->	
+			
+		</form>
+		
+		<div id=result1></div>
+		
+	</body>
+	</html>

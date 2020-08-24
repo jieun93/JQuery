@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>click이벤트</title>
+			<script src="../js/jquery-3.4.1.min.js"></script>
+			<script>
+			$(document).ready(function(){
+				
+				//alert(1);
+				
+				$("h2:even").click(function(){
+					//	alert("h2를 클릭하셨습니다.");
+					$("this").hide(); //display:none과 동일 this를 클릭하면 해당 객체를 사라지게 만듬
+				});
+			});
+			
+			$(function(){
+				// alert(2);
+				var domele = document.getElementsByTagName("h2")[0]; //자바스크립트 h2태그의 0번째에 색상을 변경하는거
+				//domele.style.color = "red";
+				
+				
+				/*
+					css()는 jquery메소드이기 때문에 변수에 바로 사용 불가능하다
+					domele.css()는 사용불가능
+					
+					dom객체로 jquery 메소드를 사용하기 위해서는  dom객체를 $()로 감싸준다.
+				
+				*/
+				$(domele).css("color","red"); //제이쿼리는 $라는걸 꼭 써야한다.
+				
+			});
+			
+			$(function(){
+				var pTag = $("h2").get();
+				
+				console.log(pTag);
+				/*
+				$(pTag[0]).css("color","blue"); //첫번쨰꺼만 지정해서 블루로 함
+				
+				// $("h2").css();
+				
+				for(var i = 0; i<pTag.length; i++){
+					if(i%2 == 1 ){		 //배열은 0부터 시작된다. 0으로 나누면 홀수번 1로 나누면 짝수번 			
+						$(pTag[i]).css("color","red");
+					}
+				} 
+				*/
+				
+				$("h2:odd").css("color","red"); //홀수번째 위치 (index는 0부터 시작)
+				$("h2:even").css("color","blue"); //짝수번째 위치
+				$("h2:first").css("color","orange"); //맨 처음걸 색상변경
+				$("h2:last").css("color","pink");	//마지막 색상변경
+				
+				/*h2버튼을 클릭했을 경우  홀수번째에 있는 h2만 사라지게 하는 로직을 만들어주세요.*/
+				
+				
+			});
+			
+			
+			</script>
+		</head>
+		<body>
+			<h2>클릭하면 사라집니다. 1</h2>
+			<h2>클릭하면 사라집니다. 2</h2>
+			<h2>클릭하면 사라집니다. 3</h2>
+			<h2>클릭하면 사라집니다. 4</h2>
+			<h2>클릭하면 사라집니다. 5</h2>
+		</body>
+	</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+		<html>
+			<head>
+				<meta charset="UTF-8">
+				<title>MediaQueryEx</title>
+				<style>
+					.navbar{background-color:#333;}
+					.navbar a{padding :20px; text-decoration:none; text-align:center; color:white;}
+					#aside{ display:inline-block;  background-color:green; width: 500px; height:500px;}
+					#content{ display:inline-block; background-color:red; width: 500px; height:500px;}
+					*{box-sizing:border-box;}
+					
+					
+					@media screen and (max-width:900px){.content{width:50%;}}
+					@media screen and (max-width:600px){
+						.navbar a{display:block; width:100%;}
+						.aside{ width:100%;}
+					}
+				
+				
+				</style>
+			
+			</head>
+			<body>
+				<div style="background:yellow; padding:5px;">
+					<p>브라우저를 리사이징 하면 구조가 변경됩니다</p>
+					
+				</div>
+				<div class="navbar">
+					<a href="#">링크1</a>
+					<a href="#">링크2</a>
+					<a href="#">링크3</a>
+					<a href="#">링크4</a>
+				
+				</div>
+				
+				<div id="aside">
+				
+				</div>
+				<div id="content">
+							
+				</div>
+				
+				<div>
+				
+				
+				</div>
+				
+			</body>
+		</html>

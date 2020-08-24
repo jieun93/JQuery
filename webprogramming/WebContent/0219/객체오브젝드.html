@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>객체 오브젝트</title>
+			<script>
+				var arr = new Array(); // (내장) 객체를 이용한 표현법
+			
+				//사용자 정의 객체
+				// 방법1) 객체 상수로 부터 객체 생성하는 방법
+				//myCar라는 객체를 만듬
+				var myCar = {
+						
+						//속성(property) - 명사로 표현
+						model : "bmw 520d",
+						speed : 0,
+						color : "black",
+						
+						//메소드 (method) - 동사로 표현
+						brake : function(){this.speed -= 10;},
+						accel : function(){this.speed += 10;}  //끝
+						
+						
+				};
+				
+				console.log(myCar.speed);
+				myCar.accel();
+				myCar.accel();
+				console.log(myCar.speed); //console.log는 백단에서 확인할수 있는 용도
+				
+				
+				// 방법2) 생성자를 이용한 객체 생성하는 방법
+				
+				function Car(model, speed, color){
+					this.model = model;
+					this.speed = speed;
+					this.color = color;
+					
+					
+					this.break = function(){
+						this.speed -=10;
+					}
+					this.accel = function(){
+						this.speed +=10;
+					}
+					
+					
+				}
+				
+				//사용방법
+				var myCar = new Car("bmw 520d",0,"black");
+			
+				
+				console.log(myCar.color);
+				myCar.color ="yellow";
+				console.log(myCar.color);
+				
+				/*accel 호출을 3번 연속해서 해주세요.
+				  콘솔에 speed 값을 출력해주세요.
+				*/
+				
+				myCar.accel();
+				console.log(myCar.speed);
+				myCar.accel();
+				console.log(myCar.speed);
+				myCar.accel();
+				console.log(myCar.speed);
+				
+				/*
+				객체를 이용한 방법으로 person객체를 만들고
+				속성 name, age, tall
+				메서드 growup - 키가 자란다(2cm)
+				
+				호출 : 나이를 한살씩 먹으면 키가 2cm 씩 자란다
+				출력 : 나이 , 키
+				
+				초기값(age = 8, tall =130)
+				
+				*/
+				
+				function person(name, age, tall){
+					this.name = name;
+					this.age = age;
+					this.tall = tall;
+					
+					this.growup  = function(){
+						this.tall += 2;
+					}
+					
+				}
+				
+				var person = new person("김태평", 28, 180);
+				
+				for(var i=0; i<4; i++){
+					person.age++;
+					person.growup();
+				}
+				
+				console.log(person.age+"살,"+person.tall+"cm");
+						 
+						
+						
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</script>
+		</head>
+		<body>
+		
+		</body>
+	</html>

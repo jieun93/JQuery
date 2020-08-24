@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>이미지 interval</title>
+			<style>
+				img{ width:200px; height:200px;}
+			
+			</style>
+			<script>
+				var arr = ["../img/shop.jpg","../img/mountain.jpg","../img/coffee.jpg","../img/pengsu.jpg"];
+				
+				function setInterImg(){
+				  a = setInterval(imgChange, 3000);
+				}
+				
+				var i = 0;
+				
+				/*for 문으로 생각하면 된다.*/
+				function imgChange(){
+					/*0,1,2 배열 index가 순서대로 실행 될 수 있게 변경*/
+					if(i==3) i=0;
+					document.getElementById("myimg").src = arr[i];
+					i++;
+				}
+				
+				function clearInterImg(){
+					
+					clearInterval(a);
+					
+				}
+				
+				function randomImg(){
+					b = setInterval(ranChange, 3000);
+				}
+				
+				function ranChange(){
+					/*이미지 4개의 배열을 생성후 (전역변수 )해당 이미지를 랜덤으로 보여지게 만들어주세요.
+					(result div 안에 myimg id 이미지 태그를 변경해주세요.)
+					*/
+					
+				var pic = Math.floor(Math.random()*4)
+				
+				document.getElementById("myimg").src = arr[pic];
+					
+					
+				}
+				
+				
+			</script>
+			
+		</head>
+		<body>
+			<div>
+				<button onclick="setInterImg();">setInterImg 실행</button>
+				<button onclick="clearInterImg();">clearInterImg 실행</button>
+				<button onclick="randomImg();">랜덤 img 실행</button>
+				<hr>
+				<div id ="result">
+					<img id ="myimg" src="../img/coffee.jpg">
+				</div>			
+			
+			
+			</div>
+		
+		</body>
+	</html>

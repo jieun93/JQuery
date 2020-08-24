@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			$(function(){
+				$("button").click(function(){
+					$.ajax({
+						url : "./data/result.json",
+						dataType:"json", // jsaon 타입으로 가져올것이다.
+						success:function(data){
+						//	console.log(data.name);
+						//	console.log(data.age);
+						//	console.log(data[0].name);  // [] 안에 들어 잇는 데이터를 가져오는거 , [] 는 인덱스를 말하는 거다.
+						//	console.log(data[0].age);	// [0] 번째의  age에 해당하는 데이터 가져오는거
+						 var str ="";
+						$.each(data, function(i){     	//each == for문과 동일하다.
+							str += data[i].name<br>;
+							str += data[i].age;
+						});
+						
+							$("body").append(str);
+						
+						
+						}
+					});
+				});
+			});
+		
+		</script>
+	</head>
+	<body>
+		<button>클릭</button>
+	</body>
+</html>

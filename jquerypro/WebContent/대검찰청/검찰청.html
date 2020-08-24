@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>대검찰청 사이트입니다.</title>
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
+ 		<link href="css/layout.css" rel="stylesheet" type="text/css" />
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
+		<style>
+		
+		div{border:1px solid black;}
+		
+		#header{height:120px; min-width:1100px; position:relative; width:1100px; margin:0 auto;}
+		#header .util{float:right;}
+		#header .logo{float:left;}
+		.menu{float:left; margin-top:70px; margin-left:100px; position:absolute;}
+		.menu li{display:inline-block;	width:100px;}
+		#am{display:inline-block;}
+		
+		
+		
+	
+	    .mainTop{ height:560px;  position:relative;  background-attachment: scroll;  background-size: auto;}
+	    .mainTop .txt{position:absolute; color:white;  font-size: 54px; left: 125px; top:200px;}
+		 #banner{position:absolute; left: 400px; top:350px; display:inline-block; width:1100px; margin:0 auto;}
+		
+		.mainTop  #box{display:inline-block;}
+		
+		#container{clear:both; width:100%;}
+		
+		
+		
+		
+		#up li{ display:inline-block; padding:20px;}
+		#main{display:inline-block; overflow:hidden; width:61px; height:55px; background-size:46px 42px; float:left; }
+		#up{position:absolute; top:11px; right:0; z-index:100;}
+		#service li{ display:inline-block; }
+		#bg_nation{display:inline-block; width:25px; height:18px; margin: -2px 5px 0 0; vertical-align:middle;}
+		
+		
+		
+		
+		
+		</style>
+		<script type="text/javascript">
+			/*
+			$(function(){
+				
+				$("#submenu").css("display","none");
+				
+				$("#menu01").mouseover(function(){ 
+					$("#submenu").slideDown("slow");
+					
+				});
+				
+				
+				$("#menu01").mouseout(function(){
+					$("#submenu").slideUp("slow");	
+				});
+				
+			});
+*/			
+			
+			/*
+				1. submenu 닫힘형태로 변경
+				2. li태그에 mouse가 오버되면 submenu를 열림형태로 변경
+				3. li태그를 벗어나면(mouseout) submenu를 닫힘형태로 변경
+			*/
+			
+			
+			$(function(){
+				var count = 0;
+				$("#big").click(function(){
+					//5번  클릭하면 더이상 커지지 않도록
+					count++;
+					if(count<=5){
+					$("body").css("zoom","+=5%");
+					}
+				});
+				
+				$("#small").click(function(){
+					count--; 
+					if(count>=0){
+					$("body").css("zoom","-=5%");
+					}
+				})
+				
+			})
+			
+			$(function(){
+				$("#gnb_menu>li").mouseenter(function(){
+					if($(".submenu").is(":visible")){
+						$(".submenu").hide();
+					}
+					$(this).children(".submenu").show();
+					console.log("down");
+				});
+				
+				$("#gnb_menu").mouseleave(function(){
+					if($(".submenu").is(":visible")){
+						$(".submenu").slideUp();
+					}
+					console.log("up");
+					
+				});
+			
+				$(window).scroll(function(evt) {
+					console.log($('.submenu').css("position"));
+					$(".submenu").hide("fast");
+				  
+			
+			var y = $(this).scrollTop();
+		   
+		});
+	});
+			
+			$(function(){
+				$("li.banner1").click(function(){
+					$("li.banner2").slideToggle();
+				})
+				/*
+				$('li.banner1').bxSlider({
+					mode:'horizontal',
+					speed: 500,
+					pager :false,
+					moveSliders:1;
+					slideWidth:100,
+					minSlides:4,
+					maxSlides:4,
+					slideMargin:5,
+					auto : true,
+					autoHover : true,
+					controls: false
+				})
+				*/
+			})
+			
+			
+			
+			
+			
+			
+		</script>
+	</head>
+	<body>
+		<!-- 
+		<div>
+			글자크기 조정<button id="big">+(확대)</button><button id="small">-(축소)</button>
+		</div>
+		 -->
+		 <div id="header">
+			 <h1 class="logo"><a href=""><img src="../img/bg_logo_m.png"></a></h1>
+			 <div class="util">
+				<img src="../img/bg_nation.png" id="bg_nation">
+				<span class="ls nation"><a href="#none" onclick="javascript:pop_window('http://www.mois.go.kr/frt/sub/popup/p_taegugki_banner/screen.do', 875, 725)" title="국가상징안내 새창열림">국가상징안내</a></span>
+				<span class="ls"><a href="/site/museum/main.do" target="_blank" title="역사관체험관 새창열림">역사관체험관</a></span>
+				<span class="ls font">
+					글자크기조정<button id="big">(+)</button><button id="small">(-)</button></span>	
+			 </div>
+				
+			<div class="menu" id="menu01"> 
+				<ul>
+					<li>
+					<a href=""><h2>참여민원</h2></a>
+					</li>
+					<li><h2>검찰활동</h2></li>
+					<li><h2>정보자료</h2></li>
+					<li><h2>알림소식</h2></li>
+					<li><h2>정보공개</h2></li>
+					<li><h2>검찰소개</h2></li>
+					<img src ="../img/돋보기.png" id="am"  width="24px" height="23px">
+					
+					<img src ="../img/삼지창.png" id="am" width="24px" height="23px">
+				</ul>
+				
+				
+			</div>
+			<div id="gnb">
+				<div class="menu gnb_wrap">
+					<ul id="gnb_menu">
+						<li id="menu02" class="submenu">여기는 서브메뉴</li>
+						
+					</ul>
+				
+				</div>
+			
+			</div>
+			
+		</div>
+		
+		
+		<div id="container" class="main">
+			<div id="content">
+				<div class="mainTop">
+				  <p class="txt">국민과 함께하는 검찰</p>
+				  <div id="rollingBanner">
+				  	<ul>
+						<li><img src ="../img/MSI_201907240802051580.jpg"></li>
+				  	</ul>
+				  </div>
+				  <div id="banner">
+				  	<ul>
+					  	<li class="banner1"><img src="../img/banner1.png"></li>
+					  	<li class="banner2"><img src="../img/banner2.png"></li>
+				  	</ul>
+				  	<ul>
+				  	<li><img src="../img/왼쪽버튼.png"></li>
+				  	<li><img src="../img/멈춤.png"></li>
+				  	<li><img src="../img/오른쪽버튼.png"></li>
+				  	</ul>
+				  	<div id="box">
+				  		<ul>
+				  			<li><img src="../img/bg_favorite.png" width="710px" height="180px"></li>
+				  		</ul>
+				  	</div>
+				  					  
+				  </div>
+				<!-- 
+				<div id="submenu" >
+				<ul>
+				<li>통계자료</li>
+				<li>연구자료</li>
+				<li>나라지표상황판</li>
+				<li>훈령/예규</li>
+				</ul>
+				</div>
+				 -->
+					
+			</div>
+				
+				<div class="mainCont svc"></div>
+				<div class="mainCont noti"></div>
+				<div class="mainCont etc"></div>
+			</div>
+		
+		</div>
+		
+		<div id="relationBanner">배너</div>
+		<div id="footer">찾아오시는 길</div>
+		 		
+	</body>
+</html>

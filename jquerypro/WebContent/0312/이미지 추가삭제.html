@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>이미지 추가 삭제</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+		/*
+		 1.p태그를 4~5개 만들고 p태그안에 이미지명을 작성한다
+		 2. p태그를 클릭하면 이지명에 대한 이미지를 생성하여 
+		
+		 3.p태그 뒤에 붙인다
+		 4.p태그 뒤에 button을 생성하여 붙인다
+		   - button명은 "삭제"
+		
+		5.button을 클릭하면 해당 이미지가 삭제된다.
+			-prev()메서드 : 해당 하는 태그 바로 앞에 있는  태그를 가져오는것
+			- next() 메서드 : 해당하는 태그 바로 뒤에 있는 태그를 가져오는것
+			- $(this).next().remove();
+			
+		*/
+		
+		$(function(){
+			
+			$("p").click(function(){
+				var img  = $("<img/>",{
+					"src":"../img/"+$(this).text()+".jpg", // this => p태그 , p태그의 테스트를 가죠옴
+					"width":"100px",
+					"height":"100px",
+					"click":function(){ 이미지에 클릭기능을 같이 쓰는거 
+						$(this).after($("<button/>",{"text":"삭제", // 삭제버튼를 누르면 사진이 없어지는 기능
+							"click":function(){ //삭제버튼을 클릭하면 
+								$(this).prev().remove();  //사진이 없어지는거 
+							}	
+						
+						}))
+					}					
+				})
+				
+				$(this).after(img);
+				
+				
+			})
+				
+				
+				
+			})
+			
+		
+		</script>
+	</head>
+	<body>
+		<p>mountain</p>	
+		<p>fall</p>
+		<p>장미</p>
+		<p>summer</p>
+		<p>spring</p>
+	
+	</body>
+</html>

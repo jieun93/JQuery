@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>회원가입</title>
+			<script src="../js/jquery-3.4.1.min.js"></script>
+			<script>
+				function proc1(){
+				//alert("유효성체크");
+				/*이름값이 공백일 경우 " 이름을 입력해주세요." 라고 alert 문구를 띄우기*/
+				//document.getElementById("name").value
+				
+				console.log(document.ff.name.value); //form으로 가져오는 방법
+				var name = document.ff.name.value.trim(); //form의 name의 id를 가져와 넣을 name을 만듬
+				
+					 // name == ""
+					 if(name.length == 0){ //입력한 name의 값의 길이가 0 인 경우 공백확인
+						alert("이름을 입력해주세요");
+						return false;
+					  }else{
+					  //이름의 정규식 한글 표현.  정규식에서는 // 묶음표시로 한다.
+					  // var regname = /^[ㄱ-ㅎ가-힣]+/;
+					  
+					  //영문 또는 한글로 정규식 표현
+					 /* var regname = /^[ㄱ-ㅎ가-힣]+ | ^[a-zA-Z]+/;
+					  if(!regname.test(name)){ //입력된 name이 한글 또는 영문이 아니면 alert실행
+						  alert("한글 또는 영문을  입력해주세요.");
+						  return false;
+					  } ************여기부분 안됨***************************
+					  */
+					  
+					  /* 한글 일때 , 6자 이하 통과 : alert('6자 이하를 입력해주세요')*/
+					  var korname = /^[ㄱ-ㅎ가-힣]+/;
+					  if(korname.test(name)){ //name의 갑이 한글일때
+						  if(name.length > 6){ //name의 길이가 6 이상이면 alert 실행
+						  alert("6자 이하를 입력해주세요.");
+						  return false;
+						  }
+					  }
+					  
+					  /* 영문일때 , 5자 이상 ~ 20자 이하 통과*/
+					  var Engname = /^[a-zA-Z]+/;
+					  if(Engname.test(name)){ //name이 영문일때
+						  if(5 >= name.length || name.length>=20){
+						  alert("5자 이상 ~ 20자 이하 통과");
+						  return false;
+							  
+						  }
+					  }
+					
+				  }
+				
+				
+				//주소체크(공백여부)
+				console.log(document.ff.addr.value);
+				var addr1 = document.ff.addr.value.trim();
+				
+				if(addr1.length == 0){
+					alert("주소를 입력해주세요");
+					return false;
+				}
+				
+				//생일(공백여부, 년도/월/일 형식으로 정규식 확인)
+				/* 생일 부분 걸러지지 않음*/
+				console.log(document.ff.birth.value);
+				b = document.ff.birth.value.trim();
+				var birth1 =  /^\d{4}\/\d{2}\/\d{2}/;
+				if(birthl.test(b)){
+					alert(b);
+					return false;
+				}else{
+					if(b.length == 0 ){
+						alert("생일을 입력해주세요");
+						return false;
+					}
+					
+				}
+				
+				//아이디(공백여부, 영문자만 가능, 6~8사이만 가능하게)
+				console.log(document.ff.id.value);
+				id = document.ff.id.value.trim();
+				  //영문으로 6자리에서 8자리 아이디 가능
+				if(id.length == 0){
+					 alert("아이디를 입력해주세요");
+					return false;
+					}else{
+					
+					var idid = /^[a-zA-Z]+/; //영문 정규식  
+					 if(!idid.test(id)){ //입력한 id가 영문이 아니면 
+						alert("영문으로 입력해주세요");
+						return false;
+						}else{
+						if(idid.test(id)){
+						if(id.length < 6 | id.length > 8){
+							alert("6자리에서 8자리사이로 입력해주세요.");
+							return false;
+						}
+				
+					}
+				}
+				
+				}
+				//이메일(공백여부, 이메일정규식 확인 ppt 19p 참조)
+				console.log(document.ff.email.value);
+				emails = document.ff.email.value.trim();
+				var emaill = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+				
+				if(emails.length==0){
+					alert("이메일을 입력해주세요");
+					return false;
+				}else{
+				 if(!emaill.test(emails)){
+					alert("이메일형식으로 입력해주세요.");
+					return false;
+					}
+				}
+					
+				
+				//휴대폰(공백여부, 휴대폰 정규식 확인ppt 22p 참조)
+				console.log(document.ff.cell.value);
+				cphone = document.ff.cell.value.trim();
+				var celle = /^\d{3}-\d{3,4}-\d{4}$/;
+				if(cphone.length==0){
+					alert("휴대폰번호를 입력해주세요");
+					return false;
+				}else{
+				
+				if(!celle.test(cphone)){
+					alert("ex)010-****-**** 형식으로 입력해주세요");
+					return false; 
+				}
+				}
+				return true;
+				}
+				
+				$(function(){
+					$("input[type=name]").css("border","2px solid red");
+					$("input[type=address]").css("border","2px solid orange");
+					$("input[type=birth]").css("border","2px solid yellow");
+					$("input[type=id]").css("border","2px solid green");
+					$("input[type=email]").css("border","2px solid blue");
+					$("input[type=phone]").css("background","purple");
+				})
+			</script>
+		</head>
+		<body>
+			<h2>회원가입</h2>
+		<form name ="ff" action="form.jsp" onSubmit=" return proc1();">
+			이름: <input type="name" id ='name'><br>
+			주소: <input type="address" id='addr'><br>
+			생일 : <input type="birth" id='birth'><br>
+			아이디(6-8문자) : <input type="id" id='id'><br>
+			이메일: <input type="email" id='email'><br>
+			휴대폰: <input type="phone" id='cell'><br>
+			<input type="submit" value="확인" >
+		</form>
+		
+		</body>
+	</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>form_seleter</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+		 $(function(){
+			 var str = "";
+			 $("#btnview").click(function(){
+				 
+				 /*
+				 
+				 	val()메소드를 이용하여 입력하거나 선택된 값을 가져오기 
+				 	radio()선택된 값 가져오기 : $("#radio:checked").val();  둘중하나면 
+				 	select선택한 값(option) : $("#work:selected").val();
+				 
+				 */
+				 
+				 str += $("#userName").val()+"\n";
+				 str += $("#gender:checked").val()+"\n";
+				// str += $("#gender").val()+"\n";
+				 str += $("#intro").val()+"\n";
+				 str += $("#work :selected").val()+"\n";
+				// str += $("#work").val()+"\n";
+				// $("#work").filter(":selected");
+				
+				 
+				 alert(str);
+				 /*alert에서  글 밑으로 내리기 하려면  <br>이 아니라  "역슬래시 n"을 사용 해야한다*/
+			 });
+			 
+		 });
+		</script>
+	</head>
+	<body>
+		<form>
+			이름 : <input type="text" id="userName" value="name"><br>
+			성별: <input type="radio" id="gender" name="gender" value="male">남자
+				 <input type="radio" id="gender" name="gender" value="female">여자<br>
+			소개: <textarea rows="4" id="intro" cols="40"></textarea><br>
+			직업: <select id="work">
+				 <option value="programmer">프로그래머</option>
+				 <option value="student">학생</option>
+				 <option value="work">공무원</option>
+				 <option value="no">백수</option>
+				 </select>
+				
+		  <input type="button" id="btnview" value='전송'>		
+		</form>	
+	</body>
+</html>

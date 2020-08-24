@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>배열(array)</title>
+			<script>
+			
+				function myFunc(){
+					
+					//자바스크립트는 형태를 구분하지 않고 다 넣을 수 있다.
+					
+					var fruits = ["apple","banana","peach"]; //배열선언 (리터럴로 생성)
+					
+					document.write(fruits[0]+"<br>");
+					document.write(fruits[1]+"<br>");
+					document.write(fruits[2]+"<br>");
+					
+					
+					fruits[3] = "orange";
+					fruits[10] = "grape";
+					fruits[11] = 11;
+					fruits[12] = 1.1;
+					document.write(fruits.toString());  //배열명만 사용하는 것과 .toString()메서드를 사용하는 것은 동일한 출력값을 갖는다.
+					
+					document.write("length:"+fruits.length);
+					
+					
+					document.write("<hr>");
+					
+					var food = new Array(); //객체로 배열 생성
+					
+					food[0] ="삼겹살";
+					food[1] ="족발";
+					food[2] ="짜장면";
+					food[3] ="떡볶이";
+					food[4] ="스파게티";
+					
+					document.write(food);
+					
+					for(var i =0; food.length; i++){
+						document.write(food[i]+"<br>");
+					}
+					for(var i in food){  //for - in 문
+						document.write(food[i]+"<br>");
+					}
+					
+					
+				}
+				
+				myFunc();
+				
+				
+				/*
+				 prompt로 자신이 가고 싶은 휴가지를 입력받으세요
+				 배열을 선언한 후 해당 휴가지의 텍스트를 입력하세요.
+				 마지막에 공백을 입력하면 (엔터만 치면) 배열을 출력하세요.
+				 
+				*/
+				function myVac{
+				
+				
+				var vacation = [];
+					var i =0;
+				do{
+				 var ho = prompt("휴가지를 입력해주세요.");
+					vacation[i++] = ho;
+				
+				}while(ho !=" ");
+					
+					for(var i = 0; vacation.length; i++){
+					
+						document.write(vacation[i]+"<br>");
+				
+				}
+				
+				}
+				myVac();
+				
+				
+				/*
+					prompt로 숫자를 입력받아서 0이 입력되면 반복문을 종료하고 입력된 짝수번째의 합과 홀수번쨰의 합을 출력하세요.
+					
+					출력형태
+					1,2,3,4,5,6,7,8,9,10
+					짝수의 합:
+					홀수의 합:	
+					
+				*/
+				
+				function myMath{
+						
+						var input = prompt("숫자를 입력해주세요.");
+						var dsum; // 짝수번쨰의 합
+						var hsum; // 홀수번째의 합
+						var sum = new Array(); //배열
+						
+						while( input != 0 ){
+							 
+							if(sum[i]%2==0){
+								dsum +=sum[i];
+							}else if(sum[i]%2 != 0){
+								hsum +=sum[i];
+							}
+							
+							
+						}
+						document.write("출력형태 "+"<br>"+input);
+						document.write("짝수번쨰의 합 : "+ dsum);
+						document.write("홀수번쨰의 합 : "+ hsum);
+						
+						
+						
+					}
+				
+				myMath();
+				
+				
+				
+			</script>
+		</head>
+		<body>
+		
+		</body>
+	</html>

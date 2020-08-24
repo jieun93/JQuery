@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax_xml</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+		//jquery 미사용 버전
+		
+		/*
+		 readyState 
+		 
+		 0(uninitialzed) - request가 초기화 되지 않음
+		 1(loading) - 서버와의 연결이 성사 됨
+		 2(loaded) - 서버가 request를 받음
+		 3(interactive) - request를 처리 하는 중
+		 4(complete) = request에 대한 처리가 끝았으며 응담을 줄 준비가 완료됨
+		 
+		 
+		 status  상태
+		 200 - ok 요청이 성공적으로 되었습니다.
+		 202 - Accepted 요청을 수신하였지만 그에 응할 수 없다
+		 404 - Not found  서버는 요청 받은 리소스를 찾을 수 없습니다( 페이지가 존재 하지 않음)
+		 500  - internal server error  서버는 아직 처리 방법을 알 수 없다(서버가 준비 안됐다)
+		
+		*/
+	/* 	
+		function loadDoc(){
+			var xhttp = new XMLHttpRequest(); // 자바스크립트에 있는 메서드 
+			xhttp.onreadystatechange = function(){
+				
+				// jquery ajax의 success와 done에 해당한다
+				if(this.readyState == 4 && this.status == 200 ){ 
+					console.log("xml이 로딩 되었습니다.");
+					dataLoad(this);
+				}else{ //jquery ajax의 fail과 error에 해당한다
+					console.log("xml이 로딩 되지 않았습ㄴ디ㅏ."+this.readyState+","+this.status);
+				}
+			} // 상태값이 변화 했을 때 감지해서 호출해라
+			
+			
+			xhttp.open("GET","../data/cd_catalog.xml",true);  // 연결
+			xhttp.send(); // 통신시키는거 
+		}
+		function dataLoad(xml){
+		 var xmlDoc = xml.responseXML;  //xmlDoc 에는 전체가 들어가 잇다
+		 var x = xmlDoc.getElementsByTagName("CD");
+		 var result = "";
+		 var re ="";
+		 
+		 
+		 for(var i = 0; i < x.length; i++){
+			result += x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue;
+			result += "<br>";
+	
+		 }
+		 
+		 
+		 for(var i=0; i<x.length; i++){
+			 re += x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue;
+			 re +="<br>";
+		 }
+		 document.getElementById("ar").innerHTML = result;
+		 document.getElementById("ti").innerHTML = re;
+		 
+		}
+		
+		 */
+		
+		$(function(){
+			 $("button").click(function(){
+				
+				$.ajax({
+					url:"../data/cd_catalog.xml",
+					datatype:"xml",
+					success:function(xml){
+						var artist="";
+						//첫번쨰 cd의 요소만 가져옴
+						// 객체를 가져오는 문법을 사용해야 한다.
+						// find == getElementsByTagName 
+						//$($(xml)).find("CD"[0]).find("ARTIST").text()
+						
+					
+						
+						$.each($(xml).find("CD"), function(i){
+							artist +="<tr>";
+							artist +="<td>";
+							artist += $(this).find("ARTIST").text()+"<br>";
+				
+							artist +="</td>";
+							artist +="</tr>";
+							
+							/* str += data[i]."TITLE"; */
+						});
+						
+						$("#content").html(artist);
+						
+					},
+					error:function(xhr, status, errorThrowm){
+						console.log(xhr+"/"+status+"/"+errorThrown);
+						}
+					
+				});
+				
+			});
+	
+		});
+		
+		</script>
+	</head>
+	<body>
+		<!-- <button onclick="loadDoc();">버튼클릭</button> -->
+		<button>버튼클릭ㄴ</button>
+		<div id="content"></div>
+		<table border="1">
+			<th>artist</th>
+			<th>title</th>
+			<tr>
+				<td id="ar"></td>
+			
+				<td id="ti"></td>
+			</tr>
+		
+		</table>
+	</body>
+</html>

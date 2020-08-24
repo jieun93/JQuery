@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>회원가입</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+	$(function(){
+		// submit를 하면  form 태그를 써야 한다.
+		$("#mem").submit(function(){
+			// 입력창에 받는 값을 변수에 저장한다. 
+		 var idd = $("#id").val();
+		 var pww =$("#pw").val();
+		 var rpww =$("#rpw").val();
+		 var namee =$("#name").val();
+		 var addd = $("#add").val();
+		 var addrr = $("#addr").val();
+		 var tell = $("#tel").val();
+		 
+		if(pww != rpww ){
+			alert("비밀번호가 다릅니다.");
+			return false;
+		}
+		
+		 var url ="jdbc_insert.jsp";
+		 var data ={"iid":idd,"ppw":pww,"nname":namee,"aadd":addd,"aaddr":addrr,"ttel":tell};
+		 
+		 // data를  params에 담아주기
+		 var params =$.param(data);
+		 
+		 //alert(url);
+		 // div를 꼭 만들어줘야 한다. 
+		 $("div").load(url, params);
+		 
+		
+		 return false;
+			
+		 
+			
+		})
+		
+		
+		
+		
+	})
+		
+		
+		
+		</script>
+	</head>
+	<body>
+	<form id="mem">
+	 회원가입
+	 
+	 ID:<INPUT TYPE="TEXT" id="id"><br>
+	 비밀번호 :<input type="password" id="pw"><br>
+	 비밀번호 확인 :<input type ="password" id="rpw"><br>
+	 이름:<input type="text" id="name"><br>
+	 주소1: <input type="text" id="add"><br>
+	 주소2:<input type="text" id="addr"><br>
+	 전화번호 :<input type="text" id="tel"><br>
+	 
+	 <input type="submit" value="회원가입">	<br>
+	</form>
+	<div></div>
+	</body>
+</html>

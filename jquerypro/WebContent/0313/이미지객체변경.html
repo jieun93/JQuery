@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>이미지객체변경</title>
+		<script src="../js/jquery-3.4.1.min.js"></script>
+		<script>
+			$(function(){
+				
+				
+				//두개가 동일한 기능
+			//	$("button").css("diaplay","none");
+				$("button").hide();
+							
+				
+				
+				$("img").css({"width" :"100px","height":"100px"})
+				
+				$("img").mouseover(function(){
+					$(this).attr("src",$(this).attr("src2"));
+				});
+				
+				$("img").attr("temp",function(){   //temp를 임의로 만들어 줌 temp값안에 이미지 명이 들어간다
+					return $(this).attr("src");
+				});
+				
+				
+				$("img").mouseout(function(){
+					$(this).attr("src",$(this).attr("temp"));
+				});
+				
+				$("img").dblclick(function(){
+					$(this).hide();
+					
+					
+					if($("img:visible").length==0){
+						$("button").show();
+					}
+					
+				});
+				
+				$("button").click(function(){
+					$("img").show();
+					$(this).hide();
+					
+				})
+				
+				
+				
+				
+				
+				
+			});
+		</script>
+	</head>
+	<body>
+		<img src="../img/spring.jpg" src2="../img/코알라.jpg">
+		<img src="../img/spring1.jpg" src2="../img/코알라.jpg">
+		<img src="../img/spring2.jpg" src2="../img/코알라.jpg">
+		<img src="../img/spring3.jpg" src2="../img/코알라.jpg">
+		
+		<button>클릭</button>
+		
+	</body>
+</html>

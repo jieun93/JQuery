@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>게시판 리스트</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="../js/json2.js"></script>
+	
+		  <!-- Tell the browser to be responsive to screen width -->
+		  <meta name="viewport" content="width=device-width, initial-scale=1">
+		  <!-- Font Awesome -->
+		  <link rel="stylesheet" href="./bootstrap/plugins/fontawesome-free/css/all.min.css">
+		  <!-- Ionicons -->
+		  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+		  <!-- Tempusdominus Bbootstrap 4 -->
+		  <link rel="stylesheet" href="./bootstrap/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+		  <!-- iCheck -->
+		  <link rel="stylesheet" href="./bootstrap/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+		  <!-- JQVMap -->
+		  <link rel="stylesheet" href="./bootstrap/plugins/jqvmap/jqvmap.min.css">
+		  <!-- Theme style -->
+		  <link rel="stylesheet" href="./bootstrap/dist/css/adminlte.min.css">
+		  <!-- overlayScrollbars -->
+		  <link rel="stylesheet" href="./bootstrap/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+		  <!-- Daterange picker -->
+		  <link rel="stylesheet" href="./bootstrap/plugins/daterangepicker/daterangepicker.css">
+		  <!-- summernote -->
+		  <link rel="stylesheet" href="./bootstrap/plugins/summernote/summernote-bs4.css">
+		<script>
+		
+		 $(function(){
+			$.ajax({
+				url :"BoardList",
+				data:"cpage=1"
+			})
+			.done(function(data){
+ 			data = JSON.parse(data.trim()); //data를 json형식으로 parse해서 data에 담는거
+ 			
+				console.log(data);
+			// list.jsp 부분에서 json 형식으로 만든거	
+			var str = "";
+			str += "<table class ='table table-bordered' border='1px solid #dee2e6'>;"			
+ 			str += "<tr>";
+ 				str += "<th>선택</th>";
+	 			str += "<th>no</th>";
+	 			str += "<th>title</th>";
+	 			str += "<th>writer</th>";
+	 			str += "<th>content</th>";
+	 			str += "<th>date</th>";
+	 			str += "<th>cnt</th>";
+ 			str += "</tr>";
+ 			
+ 			for(var i = 0; i < data.length; i++ ){
+ 				
+ 			str += "<tr>";
+ 				str += "<td>"+"<input type='checkbox' name='check' id='"+i+"'>"+"</td>";
+	 			str += "<td>"+data[i].board_no+"</td>";
+	 			str += "<td>"+data[i].subject+"</td>";
+	 			str += "<td>"+data[i].writer+"</td>";
+	 			str += "<td>"+data[i].content+"</td>";
+	 			str += "<td>"+data[i].wdate+"</td>";
+	 			str += "<td>"+data[i].hit+"</td>";
+ 			str += "</tr>";
+ 				
+ 			}
+ 			str += "</table>";
+ 			
+ 			
+ 			$("body").append(str);
+ 			
+ 			
+			
+			})
+			.fail(function(){
+				console.log("fail");
+				console.log("불러오기 실패!");
+			});
+			
+			
+			$("#delete").click(function(){
+				$.ajax({
+					url:"DeleteServlet",
+					type:"post",
+					data:"seq="+params.board_no
+				}).done(function(data){
+					data = JSON.parse(data.trim());
+					
+				})
+			})
+			
+				  			
+			$("#write").click(function(){
+				$.ajax({
+					url:"write.html",
+					type:"post",
+					data:
+				})
+			})
+		}); 
+	
+	
+		</script>
+		
+		</head>
+		<body>
+	 	<div>
+			<input type="button" id="write" value="작성">
+			<input type="button" id="modify" value="수정">
+			<input type="button" id="delete" value="삭제">
+		</div>	 
+				
+			
+		
+				
+		</body>
+</html>

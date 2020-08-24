@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax_Chaining(ajax 체이닝)</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			$(function(){
+				
+				$.ajax({
+					url:"../data/result.txt",
+					dataType:"text"
+				})
+				.done(function(data){
+					console.log("done");
+					console.log(data);
+				})
+				.fail(function(){
+					console.log("fail");
+					console.log("오류입니다.");	
+				})
+				.always(function(){
+					console.log("always");
+					console.log("항상 출력됩니다.");
+				});
+				
+				/*
+				
+				메서드 체이닝은 밖으로 빠져 나오는거
+				
+				success == done
+				error == fail
+				
+				*/
+				
+				
+			});
+		
+		
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>

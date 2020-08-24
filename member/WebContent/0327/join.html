@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>EBS</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="json2.js"></script>
+		<style >
+		
+		span#text{color:purple;}
+		.s{width:550px;}
+		.h{width:300px;}
+		td{height:50px;}
+		input{height:25px; text-align:center; padding:3px; margin:3px;}
+		div{margin:0 auto; vertical-align:middle; position:relative;}
+		#full{ border:1px solid black; border-collapse:collapse; border-left:none; border-right:none; }
+		th{background-color: beige;}
+		#hy{padding:0 auto; margin:0 auto; text-align:center; }
+		body{margin:0 auto; width: 980px;}
+		#btn1{border:1px solid #3d7cc3; color:#3d7cc3; background: #fff; font-size:15px; margin:0 auto;  text-align:center;
+		      position:relative; top:10px; display:inline-block;}
+		#btn2{border:1px solid #3d7cc3; color:#3d7cc3; background: #fff; font-size:15px; margin:0 auto;  text-align:center;
+		       top:10px; display:inline-block;} 
+		#btn3{border:1px solid #3d7cc3; color:#3d7cc3; background: #042f6c; font-size:15px; margin:0 auto;  padding:12px 60px; text-align:center;
+		       top:10px; display:inline-block; text-color:white; height:40px;}     
+		p{color:red; font-size:7px;  padding:5px; margin:5px;}
+		</style>
+		<script>
+ 		$(function(){
+ 			
+			//정규식
+            var idRegexp = /^[a-z0-9_\-]{6,12}$/;
+            var pwRegexp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,12}$/;         
+            var nameRegexp = /^[ㄱ-ㅎ가-힣]+/;
+            var email1Regexp = /^[A-Za-z0-9_\.\-]+$/;
+            var email2Regexp = /^[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+            /* var telRegexp = RegExp(/^01[0179][0-9]{7,8}$/); */
+             var telRegexp = /^\d{3}-\d{3,4}-\d{4}$/;
+	
+			// 정규식 확인
+			 $("#id").on("blur",function(){
+				//  id  확인하기
+	            var id =$(this).val();
+				var str = "";				
+				if(!idRegexp.test(id)){
+					var str = "6-12자의 영문소문자와 숫자 사용해서 입력해주세요.";
+					$("#p1").html(str);
+				}else{
+					$("#p1").html("");
+				}
+			});
+			
+			// 아이디 중복확인
+			$("#btn1").click(function(){
+				$.ajax({
+					url:"jdbc_insert_sam.jsp?flag=1",
+					datatype :"json",
+					type:"get",
+					data:"id="+$("#id").val()
+				}).done(function(data){
+					
+					data = JSON.parse(data.trim());
+					
+					if($("#id").val() == ""){
+						var str ="아이디를 입력해주세요";
+						$("#p1").html(str);
+						return false;
+					}else if (!idRegexp.test($("#id").val())){
+						var str = "6-12자의 영문 소문자와 숫자만 사용 가능합니다.";
+						$("#p1").html(str);
+						return;
+					}
+						
+					
+					$("#p1").html(data.id);
+					
+				});
+					
+			});
+			
+			// 패스워드 확인
+				$("#pw").click(function(){
+					var pw = $(this).val();
+					console.log(pw);
+				if(!pwRegexp.test(pw)){
+					var str = "8-12자의 영문대소문자, 숫자, 특수문자를  사용하여 만들어주세요.";
+					$("#p2").html(str);
+					return;
+					}
+									
+				});			
+			
+				$("#pw").blur(function(){
+					var pw =$(this).val(); 
+					if(pwRegexp.test(pw)){
+						var str ="사용 가능한 비밀번호 입니다.";
+						$("#p2").html(str);
+					}
+				});	
+			
+				
+				
+				$("#rpw").click(function(){
+					var rpw = $(this).val();
+					
+					if(!pwRegexp.test(rpw)){
+						var str = " 위의 입력하신 비밀번호와 동일한지  확인해주세요";
+						$("#p3").html(str);
+						return;
+					}
+				});
+				
+				
+				$("#rpw").blur(function(){
+					var rpw = $(this).val();
+					if(rpw == ""){
+						$("#pw");
+						
+					}
+					
+					if($("#pw").val()== rpw){
+					$("#p2").empty();
+					$("#p3").empty();
+					
+					}
+				});
+				
+			 
+			 // 이름확인 
+			$("#name").on("blur", function(){
+				 
+				 var name = $(this).val();
+				 
+				 if(name.length == 0 ){
+					 var str = "이름을 입력해주세요";
+					 $("#p4").html(str);
+					 return false;
+				 }else if(!nameRegexp.test(name)){
+					 var str ="한글 이름을 입력해주세요";
+					 $("#p4").html(str);
+					 return;
+				 }
+				if(name !== ""){
+					$("#p4").empty();
+				}
+				 
+			 });
+			 
+			/*
+			$("#name").blur(function(){
+				
+			var name = $(this).val();
+				
+			});		 
+			*/		 
+				
+			 
+			// 성별 확인 
+			
+		 	 $("label").click(function(){
+							
+		 		  
+				 var str ="정보 수집 및 이용에 동의 해주세요";
+				 $("#p5").html(str);
+				 return; 
+				
+			
+			  });
+		 	
+			 $("#checkbox").click(function(){ 
+				  
+				  
+				 /*- true : disabled 속성을 활성화 시킵니다.
+					- false : disabled 속성을 비 활성화 시킵니다.
+					- disabled : disabled 사용 합니다. 활성화 상태라고 보시면 됩니다.
+				*/						
+				if($("#checkbox").is(":checked")){
+					 var str ="성별 정보를 입력해주세요. 정보제공을 원치 않으시면 동의를 해제해주세요.";
+					 $("#p5").html(str);
+					 $(".gender").attr("disabled", false);
+					
+				 }else {
+					 $(".gender").attr("disabled", true);
+					 $("#p5").empty();
+					 
+				 }
+					return;
+			 		 
+				 });
+			
+			 
+			  $(".gender").click(function(){
+				 		$("#p5").hide();   
+				 }); 
+			 
+			
+			  
+			 // 이메일 확인 
+			 // 앞부분 이메일
+			 $("#email").click(function(){
+				 var email = $(this).val();
+				 if(!email1Regexp.test(email)){
+					 var str ="이메일를  입력해주세요";
+					 $("#p6").html(str);
+					 return;
+				 }
+				 
+			 });
+			 
+			 $("#email").blur(function(){
+				 var email = $(this).val();
+				 if(email1Regexp.test(email)){ 
+				 $("#p6").empty();
+				 return;
+				 }
+			 });
+			 
+			 // 뒷 부분 이메일
+			 
+			 $("#mail").click(function(){
+				 
+				 var mail = $(this).val();
+				if(!email2Regexp.test($("#mail").val())){
+					var str = "이메일 형식을 올바르게 작성해주세요.";
+					$("#p6").html(str);
+					return;
+				}
+			 });
+			 
+			 $("#mail").blur(function(){
+				 var mail = $("#mail").val();
+				 if(email2Regexp.test(mail)){
+					 $("#p6").empty();
+					 return;
+				 }
+			 })
+			 
+			 
+			 
+			 // 핸드폰 확인
+			 // 체크박스를 선택하지 않으면 회원가입으로 넘어가지 않도록 막아두기
+			 $("#tel").click(function(){
+				 
+				 var tel = $(this).val();
+				
+				 if(tel == ""){
+					 var str ="핸드폰 번호를 입력해주세요";
+					 $("#p7").html(str);
+					 return;
+				 }
+					 if(!telRegexp.test($("#tel").val())){
+						var  str = "핸드폰 번호를 입력해주세요.";
+						 $("#p7").html(str);
+						 return;
+					 }
+				 
+				 
+				 
+			 });
+			 
+			 	 $("#tel").blur(function(){
+					var tel =$(this).val(); 
+					if(telRegexp.test($("#tel").val())){
+						$("#p7").empty();
+					}
+				});	 
+			  
+			 
+				 
+			 
+		
+			 
+			 // 생년월일 경고창
+	 		  $("select").on("click", function(){
+	 			var str = "생년 ,월,일을 입력해주세요";
+	 			$("#p9").html(str);
+	 			
+	 		 });
+			 
+	 		  
+	 		  
+			 insertDate();
+			 
+			 
+			
+			 // 확인 버튼을 눌렀을 떄 넘어가는거 기능 넣기
+			 // 버튼을 클릭하면 form이 시작된다.
+			 // form에서 기능을 넣어줘야 하는건지????
+			 //  빈칸이 하나라도 있으면  DB에 담기지 않도록 만들어야 한다. 		 
+					 
+					 
+			 $("#btn3").click(function(){
+				 
+				 if($("#id").val() ==""){
+					 var str ="아이디를 입력해주세요"
+					alert(str);
+					 return false;
+				 }
+				 
+				 if($("#pw").val() ==""){
+					 var str ="비밀번호를  입력해주세요"
+					alert(str);
+					 return false;
+				 }
+				 if($("rpw").val() ==""){
+					 var str ="비밀번호를 확인해주세요."
+					alert(str);
+					 return false;
+				 }
+				 if($("#name").val() ==""){
+					 var str ="이름을  입력해주세요"
+					alert(str);
+					 return false;
+				 }
+				 if(!$(".gender").is(":checked")){
+					 var str = "성별을 선택해주세요.";
+					 alert(str);
+					 return false;
+				 }
+				 if($("#year option:selected").text() == "----년"){
+					 var str ="년도을 입력해주세여";
+					 alert(str);
+					 return false;
+				 }
+				 if($("#month option:selected").text() == "--월"){
+					 var str ="월을 입력해주세여";
+					 alert(str);
+					 return false;
+				 }
+				 if($("#day option:selected").text() == "--일"){
+					 var str ="일을 입력해주세여";
+					 alert(str);
+					 return false;
+				 }
+				 
+				 if($("#email").val() ==""){
+					 var str ="이메일를  입력해주세요"
+					alert(str);
+					 return false;
+				 }
+				 if($("#mail").val() ==""){
+					 var str ="이메일 형식을  입력해주세요"
+					alert(str);
+					 return false;
+				 }
+				 
+				 if($("#zip").val() == ""){
+					 var str ="우편, 주소를 입력해주세요";
+					 alert(str);
+					 return false;
+				 }
+				 
+				 if($("#tel").val() ==""){
+					 var str ="전화번호를  입력해주세요"
+					alert(str);
+					 return false;
+				 }
+				 
+				 if(!$("#checkbox1").is(":checked") | !$("#checkbox").is(":checked") ){
+					 var str = "정보 수집에 동의 해주세요.";
+					 alert(str);
+					 return false;
+				 }
+				
+				
+				 		 
+				 
+			 });
+			 
+			 
+ 		});
+ 		
+ 		function goPopup(){
+ 			// 주소검색을 수행할 팝업 페이지를 호출합니다.
+ 			// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+ 			var pop = window.open("jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+ 			
+ 			// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+ 		    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+ 		};
+ 		
+ 		
+ 		function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+ 			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+ 			
+ 		/* 	
+ 			document.form.roadAddrPart1.value = roadAddrPart1;
+ 			document.form.roadAddrPart2.value = roadAddrPart2;
+ 			document.form.zipNo.value = zipNo; 			 
+ 		*/
+ 			 
+ 			 $("#add1").val(roadAddrPart1);
+ 			 $("#add2").val(addrDetail);
+ 			 $("#zip").val(zipNo);
+ 		}
+
+ 		
+ 		
+ 		 
+ 		
+ 		// 생년월일  월에  일수 맞추는거      	insertDate--> 위의 onclick 기능에 넣어두었음 
+ 		// 셍년월일 구하기 
+		 function insertDate(){
+ 			
+	         var date = new Date();  // 현재 연도 
+	         var year = date.getFullYear()-59;  // 현재 연도에서 -59를 해서 1900년도 대의 선택값을 만들어 주는거 
+	         
+	         // getFullYear()  ==> 현재 연도를 4비트의 숫자로(yyyy)로 반환하는거 
+	         
+	         // 연도 구하기
+	         for(var i = 0; i < 60 ; i++){
+	            val_year = year + i;
+	            $("#year").append($('<option/>',{
+	               text:val_year,
+	               value:val_year
+	            }));
+	         } 
+	         // 월  구하기 
+	         for(var i = 1; i <= 12 ; i++){
+	            $("#month").append($('<option/>',{
+	               text:i,  // 보여지는 숫자				1	2		...	11	12
+	               value:i	// 갖고 있는 속성 숫자 값			1	2		...	11	12
+	               
+	            }));
+	         }
+	         // 일 구하기
+	         $("#day").append($('<option/>',{
+	            text:"--일"
+	            
+	         }));
+	         
+	         
+	      }
+		 
+		 // 생년월일  월에  일수 맞추는거 
+		 // MONTH는  선택된 월수에서 1을 더하고 일수에서 -1을 해야 한다.
+		 
+	     function dayCal(){
+			 // 일을 비워주는거  선택된 거에  일수가  쌓이지 않도록 공백을  만들어 주는거  
+	         $("#day").empty();
+			 // 월을 선택했을 떄 자동으로 1일이 되지 않도록  해두는거 
+	         $("#day").append($('<option/>',{
+	            text:"--일"
+	            
+	         }));
+			 
+	         // 일 계산하는 거 
+			 //  다음달에서 1을 빼면 이전달의 일수를 알수있다.
+			 // new Date ==> 선택된 값의 +1이 되는거 
+	         var date = new Date($("#year option:selected").val(), parseInt($("#month option:selected").val()));
+	         date.setDate(date.getDate()-1);
+	      
+	         for(var i = 1; i <= date.getDate() ; i++){
+	            $("#day").append($('<option/>',{
+	               text:i,
+	               value:i
+	            }));
+	         }
+	   
+	      }
+		</script>
+	</head>
+	<body> 
+		<h1>회원가입</h1>
+		<hr>
+		<h2> &gt; 정보입력 및 본인확인</h2>
+
+		<form method="get" id="ebs" onSubmit="return proc();" name="ff" action="jdbc_insert_sam.jsp">
+		<input type="hidden" name="flag" value="2">
+		
+			<table  id="full" border="1">
+				<tr>
+					<th>아이디</th>
+					<td>&nbsp;<input type ="text"  name="id" class="h" id="id">&nbsp;&nbsp;<input type ="button" value="중복확인" id="btn1">
+					<p class = "check" id = "p1"></p>
+					</td>
+				</tr>
+				<tr>
+					<th>비밀번호</th>
+					<td>&nbsp;<input type ="password"  name="pass" class="h" id="pw"> 
+					<p class = "check" id = "p2"></p>
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<th>비밀번호 확인</th>
+					<td>&nbsp;<input type ="password"  name="pass" class="h" id="rpw"> 
+					<p class = "check" id ="p3"></p>
+					</td>
+					
+				</tr>
+				
+				<tr>
+					<th>이름</th>
+					<td>&nbsp;<input type ="text"  name="name" class="h" id="name"> 
+					<p id="p4"></p>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>성별</th>
+						<td id="click">&nbsp;
+						<input type="radio" name="gender"  value="남성" class="gender" disabled="disabled">&nbsp;<label>남성</label>
+						<input type="radio" name="gender" value="여성" class="gender" disabled="disabled">&nbsp;<label>여성</label>
+						<input type="checkbox" name= "checkbox" id="checkbox" value="선택정보(성별) 수집 및 이용 동의">&nbsp;선택정보(성별) 수집 및 이용 동의
+						<p id="p5"></p>
+						</td>
+				</tr>
+				<tr>
+						<th>생년월일</th>
+						<td id="bb">
+						<select name ="year" id="year">
+						<option>----년</option>
+						</select>년
+						<select name ="month" id="month" onclick="dayCal()">
+						<option>--월</option>
+						</select>월
+						<select  name= "day" id="day">
+						<option>--일</option>
+						</select>일
+						<p id="p9"></p>
+						</td>
+					</tr>
+					<tr>          
+						<th>이메일</th>
+						<td>&nbsp;<input type="text"  name="email" class="h" id="email">&nbsp; @&nbsp;<input type="text" name="mail" id="mail"class="h" ><br>
+						<span id="text"><h5>&nbsp;아이디나 비밀번호를 찾기위해 사용되오니 정확한 정보로 입력하시기 바랍니다.</h5></span>
+						<p id="p6"></p>
+						</td>
+					</tr>	
+					<tr>
+						<th>주소</th>
+						<td> 우편번호:&nbsp;<input type="text" name="zip" id="zip"> <input type="button" value="번호검색" id="btn2" onclick="goPopup();"><br>
+						 	  주 &nbsp;&nbsp;&nbsp;&nbsp; 소:&nbsp;<input type="text" class="s" name="add1" id="add1"><br>
+							 상세주소:&nbsp;<input type="text" class="s" name="add2" id="add2"></td> 
+					</tr>
+					 <tr>
+						<th>휴대폰</th>
+						<td>&nbsp;<input type="text" name="tel"class="h" id="tel"><br><input type="checkbox" name="checkbox1" id="checkbox1" >&nbsp;선택정보(휴대폰) 수집 및 동의<br>
+						<span id="text"><h5>&nbsp;아이디나 비밀번호를 찾기위해 사용되오니 정확한 정보로 입력하시기 바랍니다.</h5></span>
+						<p id="p7"></p>
+						</td>
+						<tr>
+						<!--
+					<th>인증방법</th>
+						<td>	&nbsp;<input type="radio" name="cellphone">휴대폰&nbsp;<input type="radio" name="email">이메일 &nbsp;<input type="button" value="인증"><br>
+						<span id="text"><h5>&nbsp;휴대폰 인증을 위한 인증번호 발송은 1일 최대 3회까지 가능합니다.</h5></span></td>
+					</tr>
+					<tr>
+						<th>인증번호</th>
+						<td>&nbsp;<input type="text" name="number" class="h">&nbsp;<input type="button" name="numbaer" value="확인"></td>
+					</tr> -->
+		
+			</table>
+			
+				<!-- <h5>&amp;교사 회원님을 위한 교사인증은 가입 후 회원정보수정에서 인증하실 수 있습니다.</h5><br>  -->
+			
+			
+			<div id="hy">
+			<input type="submit" name="comform" value="확인" id="btn3">
+			<p id="pp"></p>
+			</div>
+			                         
+			
+			</form>
+		<div></div>
+	</body>
+</html>
+
+

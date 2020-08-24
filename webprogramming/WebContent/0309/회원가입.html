@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>회원가입</title>
+			<style>
+			div#box{border:1px solid;}
+			
+		
+			
+			/*
+			아이디는 영문자 소문자로 시작하고 8 ~ 20 글자로 입력
+			받는다.
+			
+			비밀번호는 영문 소문자, 대문자, 숫자, 특수문자가 반드시
+			1글자 포함되도록 8 ~ 20 글자 사이로 입력 받는다.
+			
+			이름은 한글로 2자에서 5자로 입력받는다.
+			
+			생일, 전화번호는 숫자만 입력 받을 수 있도록 한다.
+			
+			이메일 형식에 맞게 입력받는다.
+			*/
+			</style>
+			<script>
+			 function proc1(){
+				 
+				 //아이디는 영문자 소문자로 시작하고 8 ~ 20 글자로 입력받는다.
+				 console.log(document.sc.id.value);
+				 var id = document.sc.id.value.trim();
+				 	 
+								
+				 var idid = /^[a-z]{1}[a-zA-Z0-9]{7,19}$+/;  //소문자 정규식
+					
+					if(!idid.test(id)){ 
+						 alert("잘못된 입력입니다.");
+						
+					}else{
+						 alert("올바른 입력입니다.");
+						 return false;
+					}
+				
+						
+				 
+				 
+				 //비밀번호는 영문 소문자, 대문자, 숫자, 특수문자가 반드시 1글자 포함되도록 8 ~ 20 글자 사이로 입력 받는다.
+				 console.log(document.sc.pass.value);
+				 var pass = document.sc.pass.value.trim();
+				 
+				 var check  = /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9])(?=.*[0-9]).{8,20}+/;
+				 
+				 if(!check.text(pass)){
+					 alert("영문,숫자특수문자의 조합으로 입력해주세요.")
+					 return false;
+				 }else if(pass.length == 0){
+						 alert("패스워드를 입력해주세여")
+						 return false;
+					 }
+				 }
+				 
+				 
+				 
+				 
+				 
+				//이름은 한글로 2자에서 5자로 입력받는다.
+				console.log(document.sc.name.value);
+				var name1 = document.sc.name.value.trim();
+				
+				if(name1.length == 0){ //입력한 name의 값의 길이가 0 인 경우 공백확인
+					alert("이름을 입력해주세요");
+					return false;
+				  }else{
+					  	
+					  var korname = /^[ㄱ-ㅎ가-힣]+/;
+					
+					  if(korname.test(name1)){ //name의 갑이 한글일때
+						  if(name1.length > 2 | name1.length <6){
+						  alert("6자 이하를 입력해주세요.");
+						  return false;
+						  }
+					  }else{
+						  alert("한글로 입력해주세요.");
+						  return false;
+						  }
+					  }
+					  
+				//전화번호는 숫자만 입력 받을 수 있도록 한다.
+				console.log(document.sc.phone.value);
+				cphone = document.ff.phone.value.trim();
+				var celle = /^\d{3}-\d{3,4}-\d{4}$/;
+				if(cphone.length==0){
+					alert("휴대폰번호를 입력해주세요");
+					return false;
+				}else{
+				
+				if(!celle.test(cphone)){
+					alert("ex)010-****-**** 형식으로 입력해주세요");
+					return false;
+				}
+				}
+				 
+				
+				//	이메일 형식에 맞게 입력받는다.
+				console.log(document.sc.email.value);
+				emails = document.sc.email.value.trim();
+				var emaill = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+				
+				if(emails.length==0){
+					alert("이메일을 입력해주세요");
+					return false;
+				}else{
+				 if(!emaill.test(emails)){
+					alert("이메일형식으로 입력해주세요.");
+					return false;
+					}
+				}
+				 
+				 
+				// return true;
+			 }
+			
+			
+			</script>
+			
+		</head>
+		<body>
+		<form name="sc" action="form.jsp" onSubmit="return proc1();">
+			<div id="box">
+			<table>
+			<tr>
+			<td>아이디</td>
+			<td>&nbsp;<input type="text" id="id" class="nemo" > <input type="button" value="id검사"><br></td>
+			</tr>
+			
+			 <tr>
+			<td>패스워드</td>
+			 <td>&nbsp;<input type="text" id="pass" class="nemo"><br></td>
+			</tr> 
+			
+			<tr>
+			<td>패스워드 확인</td>
+			<td>&nbsp;<input type="text" id="passre" class="nemo"><br></td>
+			</tr>
+			
+			<tr>
+			<td>이름</td>
+			<td>&nbsp;<input type ="text" id="name" class="nemo"><br></td>
+			</tr>
+			
+			<tr>
+			<td>성별</td>
+			<td>&nbsp;<input type = "radio" id="male" class="nemo">남자 <input type="radio" id="female" class="nemo">여자<br></td>
+			</tr>
+			
+			<tr>
+			<td>휴대번호</td>
+			<td>&nbsp;<input type ="text" id="phone" class="nemo"><br></td>
+			</tr>
+			
+			<tr>
+			<td>이메일</td>
+			<td>&nbsp;<input type="text" id="email" class="nemo"><br></td>
+			</tr>
+			</table>
+			</div>
+	
+				
+			<input type ="submit" value ="제출">
+			<input type="button" value ="초기화">
+			</form>
+		</body>
+	</html>

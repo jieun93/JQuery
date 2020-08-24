@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+				<meta charset="UTF-8">
+				<title>webshopping</title>
+				<style>
+					header{width:100%;  height: 100px;  background-color:#F5F5F5; }
+					header h1 img {width:100px; vertical-align:middle;}
+					header h1 a{ text-decoration: none; color:black;}        /*밑줄 없애는고 검은글씨 */
+					header h1 a: hover{text-decoration:underline;}
+					
+					nav{width: 100%; height : 60px; background-color:#ffffff; }
+					nav{border-top:3px dotted olive;  border-bottom:1px solid olive; padding: 15px 0;} /*padding은 안쪽 여백*/
+					nav{text-align:center;}
+					nav ul{list-style:none; padding :0;  margin:0;}
+					nav ul li{display:inline-block;  margin: 5px 30px;}
+					nav ul li a{padding:10px; font-weight:bold;  font-size:16pt; text-decoration:none;  letter-spacing:0.5em;}
+					/*letter-spacing ==> 글짜 사이 띄우는거*/
+					nav ul li a:visited{color:green; background-color:yellow;}
+					nav ul li a:hover{background-color:red;  color:white;}		/*마우스 오버하는거 */
+					
+					
+					aside#left{width:15%; height:500px; float:left; background-color:#221100; /*padding:20px 0;*//*전체사이즈가 늘어난다 주의!!!!*/ }
+					aside#left h2{color:white; padding-left:20px;}
+					aside#left ul{ background-color:#525d76;  list-style:none; padding:0;}
+					aside#left ul li{border-bottom:1px solid rgba(0,0,0,0.3);} /*rgb(0,0,0 은 검정색 0.3은 투명함의 정도)*//*컴퓨터와 의류의 경계선*/
+					aside#left ul li a{display:block; text-decoration:none; color:white; font-weight:bold; padding:10px 20px;}
+					aside#left ul li a:hover{background-color: rgba(0,0,0,0.3); color:#ff00ee;}
+					aside#left ul li a:visited{color:yellow;}
+					
+					
+					section{width:70%; height:500px; background-color:#fff; float:left;}
+					article{height:98%; }
+					section iframe{ width:100%; height:100%; overflow:hidden;}
+					section h2{display:none;}
+					
+					
+					
+					aside#right{width:15%; height:500px; float:left; background-color:#99aaff;}
+					#loginBox{padding:10px;}
+					#cart{padding:10px;}
+					
+					
+					
+					
+					
+					footer{width:100%; height:50px; clear:both; background-color:#66dd22; padding:10px;  text-align:center;}
+					
+				</style>
+		</head>
+		<body>
+				<header>
+						<h1>
+							<img src="../img2/shopping.jpg" alt="로고 이미지">
+							<a href =" ">webshopping</a>
+						</h1>
+				
+				</header>
+				<nav>
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">ABOUT US</a></li>
+						<li><a href="#">NEWS</a></li>
+						<li><a href="#">MY ACCOUNT</a></li>
+						<li><a href="#">CONTACTS</a></li>
+					</ul>
+				</nav>
+				<aside id="left">
+						<h2>카테고리</h2>
+						<ul>
+							<li><a href="컴퓨터.html" target="ifr">컴퓨터</a></li>
+							<li><a href="의류.html"  target="ifr">의류</a></li>
+							<li><a href="#">음악</a></li>
+							<li><a href="#">영화</a></li>
+							<li><a href="#">스포츠/레저</a></li>
+							<li><a href="#">가구/인테리어</a></li>
+							<li><a href="#">식품</a></li>
+						</ul>
+				
+				</aside>
+				<section>
+					<article>
+						<h2>상세보기</h2>
+						<iframe src="컴퓨터.html"  name="ifr"></iframe>
+						
+					</article>
+				</section>
+				<aside id="right">
+					<div id="cart">
+					<h2>Shopping Cart</h2>
+					<p>현재 쇼핑카트에 물품이 없습니다.</p>
+					<br>
+					
+					<a href="shoppingcart.html" target="ifr">쇼핑카트 보기</a>
+					
+					</div>
+					<div id="loginBox">
+					<h2>Log In</h2>
+					<p>아이디 <br><input type="text"></p>
+					<p>패스워드<br><input type="text"></p>
+					
+					<input type="button" value="로그인">
+					<input type="button" value="초기화">
+					
+				<p>	<a href="../0206/ebs.html" target="ifr">회원가입</a> 
+					<a href="#">비밀번호 분실</a></p>
+					
+					</div>
+				
+				</aside>
+				<footer>
+				Copyright (c) 2020 연지은 YEON
+				</footer>
+		
+		</body>
+	</html>

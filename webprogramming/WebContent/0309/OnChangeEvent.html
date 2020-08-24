@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>OnChangeEvent</title>
+			<script>
+				function sub(){
+					var txt = document.getElementsByName("eng")[0].value;
+					//alert(txt);
+					//var doc = document.getElementsByName("eng")[0]; //배열형태로 가져오는거
+					//doc.value = doc.value.toUpperCase(); //대문자로 변경
+					//doc.value = doc.value.toLowerCase(); //소문자로 변경
+					
+				}
+				function color1(){
+					var color3 = document.getElementsByName("color2")[0].value; //value에 입력되는 색깔이 들어가는거
+					document.body.style.backgroundColor = color3;
+				}
+			</script>
+		</head>
+		<body>
+			<input type="text" name = "eng" onchange="sub();">
+			<p>입력필드를 벗어나면 onchange이벤트가 실행된다</p>
+			
+			<input type="text" name ="color2" onchange="color1();">
+			<p>색상을 입력해주세요</p>
+			<!-- OnChange를 이용해서 
+				Input type = "text" 안에 컬러값을 넣고 (red, yellow....)해당하는 컬러값에 따라 body의 배경색을 변경하세요.
+			 -->
+			
+		
+		</body>
+	</html>

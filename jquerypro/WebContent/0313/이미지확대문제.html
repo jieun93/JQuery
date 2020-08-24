@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>이미지확대문제</title>
+		<script src="../js/jquery-3.4.1.min.js"></script>
+		<style>
+		
+			#preview{z-index:9999; position:absolute; display:none;}
+		
+		</style>
+		<script>
+		
+		/*
+			1) <span>태그를 이용해서 이미지명을 작성한다
+				- <span>장미</span><span>펭귄</span><span>봄</span>
+			2) 해당하는 텍스트에 마우스를 오버하면 body에 해당하는 이미지가 나오도록 해주세요.
+			3) 텍스트를 마우스아웃하면 이미지가 없어지도록 
+			
+			cf) 
+			1) span태그를 block 태그로 만들고 크기를 설정해준다(100*100)
+			2) 해당하는 span태그를 background color를 변경한다
+			3) 텍스트를 감싸고  있는 block태그 위에 마우스를 오버하면 이미지가 따라 다니도록 마우스를 아웃하면 이미지가 삭제 되도록
+			
+		*/
+		
+		$(function(){
+			$("span").on("mouseover",function(event){
+				var img = $("<img/>",{
+					"src":"../img/"+$(this).text()+".jpg","width":"100px","height":"100px"
+				});
+				
+				$("body").append(img);
+			});
+			
+			$("span").on("mouseout",function(event){
+				var img = $("<img/>",{
+					"src":"../img/"+$(this).text()+".jpg","width":"100px","height":"100px"
+				});
+				$("img").remove();
+			});
+			
+			
+			
+			
+			
+		});
+		
+		</script>
+	</head>
+	<body>
+		<span>fall</span>
+		<span>mountain</span>
+		<span>spring</span>
+		<span>summer</span>
+		<span>장미</span>
+	</body>
+</html>

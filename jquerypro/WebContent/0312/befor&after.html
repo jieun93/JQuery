@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>befor_after메서드</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			/*버튼이 눌렸을 경우, p태그의 내용을 alert로 가져오기*/
+			$(function(){
+				$("button").not("#btn1").click(function(){ // id가 btn1이 아닌걸 클릭했을떄
+			//	console.log(("p").html());
+					
+			/*  append 와 after  둘 다 p 태그 뒤에 붙는다.*/
+			//	$("p").append("<div>append로 붙인 태그입니다.</div>"); // p태그 안쪽으로 뒤에 붙는다
+			//	$("p").after("<div>after로 붙인 태그입니다.</div>");	// 감싸고 있는 p 태그 밖으로 해서 뒤에 붙는다.
+			
+			/*before 와 prepend는  앞에 붙는 건데 속성을 보면 다르다.*/
+				$("p").before("<div>before로 붙인 태그입니다.</div>");  // 감싸고 있는  p태그 밖으로  붙는다.
+			//	$("p").prepend("<div>prepend로 붙인 태그입니다.</div>"); // p태그 안쪽으로 붙여진다.
+			
+			})
+			
+			$("#btn1").click(function(){
+					// $("body").append($("p").clone());
+					$("p").clone().appendTo("body");
+			
+			
+				});
+			$("#btn2").click(function(){
+				var img = $("<img/>",{
+							"src" : "../img/spring.jpg",
+							"width" : "100px",
+							"height" : "100px"
+							});
+				
+				$("body").append(img);
+				
+			});
+			
+			$("#btn3").click(function(){
+			 console.log($("#img").text()); // id가 img의 택스트를 가죠옴
+			 console.log($("#img").attr("title"));
+			 
+				var img =$("<img/>",{
+					"src":"../img/"+$("#img").text()+".jpg","width" : "100px", "height" : "100px"
+				});
+				$("#btn3").after(img);
+			})
+			
+			
+			$("#clickImg").mouseover(function(){
+				var txt = $(this).attr("title"); //속성명 정해주는거
+				
+				//alert(txt);
+				//장미 이미지를 해당하는 개체(#clickImg)앞에 붙여보세요.
+				var img =$("<img/>",{
+					"src":"../img/장미.jpg","width" : "100px", "height" : "100px"
+				});
+				$(this).before(img);
+				
+				
+				
+			})
+			
+			
+				
+			});
+		</script>
+	</head>
+	<body>
+		<button>버튼입니다.</button>
+		<p>이것은 p 태그입니다.</p>
+		<!--<p>이것은 p 태그입니다2.</p>  -->	
+		
+		
+		<button id="btn1">버튼 1 복제</button>
+
+		<button id="btn2">이미지 생성 버튼</button>
+		
+		<p title="코알라13" id="img">코알라</p>
+		<button id="btn3">이미지생성</button>
+		
+		<br><br>
+		 <!-- 장미라는 글자에 마우스오버하면 사진이 보이도록 -->
+		<p id="clickImg" title="장미">장미 </p>
+		
+		
+		
+	</body>
+</html>

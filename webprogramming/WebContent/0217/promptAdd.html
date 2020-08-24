@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>promptAdd(prompt연산자)</title>
+			<script>
+			
+				var x = prompt("첫번쨰 숫자를 입력해주세요.");
+				var op = prompt("연산자를 입력해주세요","+,-,*,/ 입력");
+				var y = prompt("두번쨰 숫자를 입력해주세요.");
+			
+				
+				//연산을 한 결과 값을 아래의 write 함수를 이용하여 출력해주세요.
+				
+				var result = 0;
+				if(op == "+"){
+					result = parseInt(x)+parseInt(y);
+				}else if(op =="-"){
+					result = parseInt(x)-parseInt(y);
+				}else if(op =="*"){
+					result = parseInt(x)*parseInt(y);
+				}else if(op =="/"){
+					result = parseInt(x)/parseInt(y);
+				}
+				
+				document.write(result);
+				
+				/*
+				문제1) prompt로 숫자값을  받아서 60점 이사이면 "합격"출력  60점 미만이면 "불합격" 출력
+				문제 2) prompt로 숫자값을 받아서 홀수값이면 "홀수" 출력  짝수값이면 "짝수" 출력
+				문제 3) prompt를 두개 입력받아서 두 수가 같으면 " 같습니다" 출력  두수가 다르면 " 다릅니다" 출력
+				
+				*/
+				
+				
+				var math = prompt("점수를 입력해주세요");
+				
+				var result = 0;
+				if(math >= 60){
+					result="합격"
+				}else if(math < 60){
+					result="불합격"
+				}
+				
+				document.write(result);
+				
+				
+				var a = prompt("짝수 또는 홀수를 입력해주세요");
+				
+				var result =0;
+				if(a % 2 == 0){
+					result="짝수"
+				}else if(a % 2 !=0 ){
+					result="홀수"
+				}
+				
+				document.write(result);
+				
+				var an1 = prompt("첫 번째 값을 입력해주세요.");
+				var an2 = prompt("두 번째 값을 입력해주세요.");
+				
+				var result = 0;
+				if(pareseInt(an1) === an2){
+					/*
+					비교연산자 
+ 					== :  안에 내용만 비교
+					
+					=== :  내용 및 타입까지  비교
+					
+					!= : 안에 내용만 비교( 같지 않을 경우)
+					!== : 내용 및 타입까지 다르면 true
+					
+					*/
+					
+					
+					result="같습니다"
+				}else if(an1 != an2){
+					result="다릅니다"
+				}
+				
+				document.write(result);
+				
+				
+				
+				/*추가설명*/
+				x=parseInt(x);
+				//값은 같고 타입은 다른경우
+				if( x != y){
+					alert("아니다");
+				}else{
+					alert("같다");
+				}
+				
+				
+				x=parseInt(x);
+				//값하고 타입까지 비교 
+				if( x !== y){
+					alert("아니다");
+				}else{
+					alert("같다");
+				}
+				
+				
+				
+				
+				
+				
+			</script>
+		</head>
+		<body>
+		
+		</body>
+	</html>

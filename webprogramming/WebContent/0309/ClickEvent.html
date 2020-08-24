@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>ClickEvent</title>
+			<script>
+				function chcolor(color){
+					document.body.style.backgroundColor = color;
+				}
+				function onLoadDoc(){
+					document.body.style.backgroundColor = "yellow"; //기본배경화면은 노랑색
+				}
+				//  window.onload = function(){ 이렇게 쓰는거랑 동일하다. 추천하는 방식
+				//	document.body.style.backgroundColor = "yellow";
+				//}
+			</script>
+			</head>
+		<body onload="onLoadDoc();">
+			<form>
+				<input type ="radio" name ="btn1" onclick="chcolor('blue');"> 파랑색
+				<input type ="radio" name = "btn1" onclick="chcolor('green');"> 녹색
+			</form>
+		
+		</body>
+	</html>

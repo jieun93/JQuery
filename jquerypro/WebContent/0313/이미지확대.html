@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>이미지 확대</title>
+		<script src="../js/jquery-3.4.1.min.js"></script>
+		<style>
+			.thumbnail{ width:200px;}
+			
+			#preview{ z-index:9999; position:absolute; border:1px solid #ccc;  display:none;}
+			/*absolute를 줘서 이미지 위에  보이도록 하는거 ]*/
+		</style>
+		<script>
+			$(function(){
+				
+				//$(".thumbnail").mouseover();
+				$(document).on("mouseover",".thumbnail", function(event){
+					$("body").append("<p id='preview'><img src='"+$(this).attr("src")+"'/></p>"); // 마우스 오버하면 이미지를 하나 만드는거
+				/* 	
+					$("#preview").css("top", (event.pageY -30)+"px")
+								.css("left",(event.pageX -30)+"px").fadeIn('slow');
+					 */
+				
+				});
+				
+				
+				$(document).on("mousemove",".thumbnail", function(event){
+					
+					$("#preview").css("top", (event.pageY +10)+"px").css("left",(event.pageX +30)+"px").fadeIn('fast'); //fadeIn 은  나타내는거
+					
+				});
+				
+				$(document).on("mouseout",".thumbnail", function(){
+					$("#preview").remove();
+				});
+				
+			});
+		
+		</script>
+	</head>
+	<body>
+		<img src="../img/spring.jpg"  class= "thumbnail">
+	</body>
+</html>

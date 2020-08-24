@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>문제</title>
+			<script>
+			
+			var arr =[black,pink,orange,yellow,red];
+		
+			function setInterImg(){
+				//전역변수 선언
+				a = setInterval(backChange, 3000);
+			}
+			
+			function backChange(){
+				
+				/* 0~255의 수를 하나씩 넣어줌 */
+				var red = Math.floor(Math.random()*256);
+				var green = Math.floor(Math.random()*256);
+				var blue= Math.floor(Math.random()*256);
+				
+				
+								//16 진수로 변환해서 넣어주는 거 
+				var ss = "#"+red.toString(16)+green.toString(16)+blue.toString(16);
+				
+				document.body.style.backgroundColor = ss;
+			}
+			
+			function stop(){
+				clearInterval(a);
+				
+			}
+			
+			
+			</script>
+		</head>
+		<body>
+		<button onclick="setInterImg();">실행</button>
+		
+		<!-- 중지 버튼 클릭시 배경색이 멈출 수 있도록 하는 함수 만들어주세여. -->
+		<button onclick="stop();">중지</button>
+		
+		
+		</body>
+	</html>

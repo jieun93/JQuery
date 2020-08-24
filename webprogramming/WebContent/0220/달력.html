@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>달력</title>
+			<style>
+			table, td{
+				border:1px solid black; text-align:center;
+			}
+			td{
+			width:calc(300/7)px;
+			text-align:center;
+			}
+			button{
+			width :100%;
+			}
+			
+			</style>
+			<script>
+			var month = 3;
+			var year = 2020;
+			function add(){
+				month++;
+				if(month>12){
+					month= 1;
+					year++;
+				}
+				console.log(this.month);
+				cal();
+			}
+			function minus(){
+				
+				month--;
+				if(month<=0){
+					month= 12;
+					year--;
+				}
+				console.log(this.month);
+				cal();
+			}
+			window.onload = function(){
+				var str = "";
+				var day = 1;
+				
+				var now = new Date(); //"2020-02-01"
+				now.setFullYear(2020);
+				now.setMonth(2); //0+1월로 세팅==>3월(2)로 세팅
+				now.setDate(1); 
+				
+				
+				var nowDay = now.getDay()  // 2020년 2월 1일의  요일값을 가져옴
+				//alert(nowDay);
+				
+				
+				
+				//**여기를 수정해야 함***
+				var lastDay = (new Date(year,month,0)).getDate();
+				var dayArr = ["일","월","화","수","목","금","토"]
+				
+				//alert(lastDay);
+				
+				//calendar 그리기				
+				str += "<table>";
+				str += "<caption>";
+				str += (now.getFullYear())+"년";
+				str += "</caption>";
+				
+				
+				str += "<tr>";
+				
+				str += "<td>";
+				if(now.getMonth()==0){
+					str += "<button onclick='minus();'>"+ 12+"월</button>";
+				}else{
+					str += "<button onclick='minus();'>"+ (now.getMonth())+"월</button>";
+				}
+				str += "</td>";
+				
+				str += "<td colspan='5'>";
+				str += (now.getMonth()+1)+"월";
+				str += "</td>";
+				
+				
+				str += "<td>";
+				if(now.getMonth()==11){
+					str += "<button onclick=' add();'>"+ 1+"월</button>";
+				}else{
+					str += "<button onclick=' add();'>"+ (now.getMonth()+2)+"월</button>";
+				}
+
+				str += "</td>";
+				
+
+				str += "</tr>";
+				
+				
+				
+				str += "<tr>";
+				
+				for(var i in dayArr){
+					
+				str += "<td>";
+				str += dayArr[i];
+				str += "</td>";
+					
+				}
+				
+				
+				str += "</tr>";
+				
+				//날짜가 표시되는 함수 재활용 가능함  **건들지 않기**
+				for(var j = 0; j < 5; j++){
+					str += "<tr>";
+				
+					for(var i = 0; i < 7; i++){
+						str += "<td>";
+						if(!(j==0 && i < nowDay)&& day <=lastDay){							
+							str += day++; //칸 안에 숫자를 넣는거 
+						}
+						str += "</td>";
+					}
+				str += "</tr>";
+				}
+				str += "</table>";
+				
+				
+				
+				 /*오늘 날짜에 노란색 칠하기*/
+				 
+				
+			
+				document.getElementById("cal").innerHTML = str;
+			
+				
+			
+		/* 	 prevCalendar(){ //이전달
+				
+				nowDay = new Date(today.getFullYear(),today.getMonth()-1, today.getDate());
+				buildCalendar();
+			}
+			
+			 nextCalendar(){ //다음달
+				
+				today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
+				buildCalendar();
+			}
+			
+		
+			 */
+			}	
+			</script>
+		</head>
+		<body>
+			<div id="cal"></div>
+		</body>
+	</html>
